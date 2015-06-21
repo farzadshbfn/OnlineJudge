@@ -14,8 +14,14 @@ ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 */
 
-#include <iostream>
+#ifndef FILE_MANAGER_H
+#define FILE_MANAGER_H
 
-int main() {
-	return 0;
-}
+class FileManager {
+public:
+protected:
+private:
+};
+
+
+#endif /* FILE_MANAGER_H */
