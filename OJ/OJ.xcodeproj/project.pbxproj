@@ -6,6 +6,14 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		E20D40F01B375CC500EE4E23 /* FakeFileManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E20D40E31B375CC500EE4E23 /* FakeFileManager.cpp */; };
+		E20D40F11B375CC500EE4E23 /* FileManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E20D40E91B375CC500EE4E23 /* FileManager.cpp */; };
+		E20D40F21B375CC500EE4E23 /* Judge.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E20D40EB1B375CC500EE4E23 /* Judge.cpp */; };
+		E20D40F31B375CC500EE4E23 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E20D40ED1B375CC500EE4E23 /* main.cpp */; };
+		E20D40F41B375CC500EE4E23 /* Problem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E20D40EE1B375CC500EE4E23 /* Problem.cpp */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		E256D6901B375AE0009228C1 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -19,15 +27,15 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		E20D40C21B375C1B00EE4E23 /* FakeFileManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FakeFileManager.cpp; sourceTree = "<group>"; };
-		E20D40C31B375C1B00EE4E23 /* FakeFileManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FakeFileManager.h; sourceTree = "<group>"; };
-		E20D40C81B375C1B00EE4E23 /* FileManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FileManager.cpp; sourceTree = "<group>"; };
-		E20D40C91B375C1B00EE4E23 /* FileManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FileManager.h; sourceTree = "<group>"; };
-		E20D40CA1B375C1B00EE4E23 /* Judge.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Judge.cpp; sourceTree = "<group>"; };
-		E20D40CB1B375C1B00EE4E23 /* Judge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Judge.h; sourceTree = "<group>"; };
-		E20D40CC1B375C1B00EE4E23 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		E20D40CD1B375C1B00EE4E23 /* Problem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Problem.cpp; sourceTree = "<group>"; };
-		E20D40CE1B375C1B00EE4E23 /* Problem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Problem.h; sourceTree = "<group>"; };
+		E20D40E31B375CC500EE4E23 /* FakeFileManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FakeFileManager.cpp; sourceTree = "<group>"; };
+		E20D40E41B375CC500EE4E23 /* FakeFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FakeFileManager.h; sourceTree = "<group>"; };
+		E20D40E91B375CC500EE4E23 /* FileManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FileManager.cpp; sourceTree = "<group>"; };
+		E20D40EA1B375CC500EE4E23 /* FileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileManager.h; sourceTree = "<group>"; };
+		E20D40EB1B375CC500EE4E23 /* Judge.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Judge.cpp; sourceTree = "<group>"; };
+		E20D40EC1B375CC500EE4E23 /* Judge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Judge.h; sourceTree = "<group>"; };
+		E20D40ED1B375CC500EE4E23 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		E20D40EE1B375CC500EE4E23 /* Problem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Problem.cpp; sourceTree = "<group>"; };
+		E20D40EF1B375CC500EE4E23 /* Problem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Problem.h; sourceTree = "<group>"; };
 		E256D6921B375AE0009228C1 /* OJ */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = OJ; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -42,58 +50,60 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		E20D40C11B375C1B00EE4E23 /* Fake */ = {
+		E20D40E21B375CC500EE4E23 /* Fake */ = {
 			isa = PBXGroup;
 			children = (
-				E20D40C21B375C1B00EE4E23 /* FakeFileManager.cpp */,
-				E20D40C31B375C1B00EE4E23 /* FakeFileManager.h */,
-				E20D40C41B375C1B00EE4E23 /* Inputs */,
-				E20D40C51B375C1B00EE4E23 /* Outputs */,
-				E20D40C61B375C1B00EE4E23 /* Submissions */,
+				E20D40E31B375CC500EE4E23 /* FakeFileManager.cpp */,
+				E20D40E41B375CC500EE4E23 /* FakeFileManager.h */,
+				E20D40E51B375CC500EE4E23 /* Inputs */,
+				E20D40E61B375CC500EE4E23 /* Outputs */,
+				E20D40E71B375CC500EE4E23 /* Submissions */,
 			);
 			name = Fake;
-			path = ../../Fake;
+			path = ../Fake;
 			sourceTree = "<group>";
 		};
-		E20D40C41B375C1B00EE4E23 /* Inputs */ = {
+		E20D40E51B375CC500EE4E23 /* Inputs */ = {
 			isa = PBXGroup;
 			children = (
 			);
 			path = Inputs;
 			sourceTree = "<group>";
 		};
-		E20D40C51B375C1B00EE4E23 /* Outputs */ = {
+		E20D40E61B375CC500EE4E23 /* Outputs */ = {
 			isa = PBXGroup;
 			children = (
 			);
 			path = Outputs;
 			sourceTree = "<group>";
 		};
-		E20D40C61B375C1B00EE4E23 /* Submissions */ = {
+		E20D40E71B375CC500EE4E23 /* Submissions */ = {
 			isa = PBXGroup;
 			children = (
 			);
 			path = Submissions;
 			sourceTree = "<group>";
 		};
-		E20D40C71B375C1B00EE4E23 /* Project */ = {
+		E20D40E81B375CC500EE4E23 /* Project */ = {
 			isa = PBXGroup;
 			children = (
-				E20D40C81B375C1B00EE4E23 /* FileManager.cpp */,
-				E20D40C91B375C1B00EE4E23 /* FileManager.h */,
-				E20D40CA1B375C1B00EE4E23 /* Judge.cpp */,
-				E20D40CB1B375C1B00EE4E23 /* Judge.h */,
-				E20D40CC1B375C1B00EE4E23 /* main.cpp */,
-				E20D40CD1B375C1B00EE4E23 /* Problem.cpp */,
-				E20D40CE1B375C1B00EE4E23 /* Problem.h */,
+				E20D40E91B375CC500EE4E23 /* FileManager.cpp */,
+				E20D40EA1B375CC500EE4E23 /* FileManager.h */,
+				E20D40EB1B375CC500EE4E23 /* Judge.cpp */,
+				E20D40EC1B375CC500EE4E23 /* Judge.h */,
+				E20D40ED1B375CC500EE4E23 /* main.cpp */,
+				E20D40EE1B375CC500EE4E23 /* Problem.cpp */,
+				E20D40EF1B375CC500EE4E23 /* Problem.h */,
 			);
 			name = Project;
-			path = ../../Project;
+			path = ../Project;
 			sourceTree = "<group>";
 		};
 		E256D6891B375AE0009228C1 = {
 			isa = PBXGroup;
 			children = (
+				E20D40E21B375CC500EE4E23 /* Fake */,
+				E20D40E81B375CC500EE4E23 /* Project */,
 				E256D6941B375AE0009228C1 /* OJ */,
 				E256D6931B375AE0009228C1 /* Products */,
 			);
@@ -110,8 +120,6 @@
 		E256D6941B375AE0009228C1 /* OJ */ = {
 			isa = PBXGroup;
 			children = (
-				E20D40C11B375C1B00EE4E23 /* Fake */,
-				E20D40C71B375C1B00EE4E23 /* Project */,
 			);
 			path = OJ;
 			sourceTree = "<group>";
@@ -172,6 +180,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E20D40F01B375CC500EE4E23 /* FakeFileManager.cpp in Sources */,
+				E20D40F21B375CC500EE4E23 /* Judge.cpp in Sources */,
+				E20D40F41B375CC500EE4E23 /* Problem.cpp in Sources */,
+				E20D40F31B375CC500EE4E23 /* main.cpp in Sources */,
+				E20D40F11B375CC500EE4E23 /* FileManager.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
