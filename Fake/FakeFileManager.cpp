@@ -16,3 +16,8 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 #include "FakeFileManager.h"
 
+std::string kFakePrefixAddress = "/Users/farzadshbfn/Desktop/OJ/Fake";
+
+FakeFileManager::FakeFileManager(): FileManager(kFakePrefixAddress) {
+	
+}

@@ -22,5 +22,6 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 #include "Judge.h"
 
 int main() {
+	FileManager* fileManager = new FakeFileManager();
 	return 0;
 }

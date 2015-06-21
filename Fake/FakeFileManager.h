@@ -19,8 +19,9 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 #include "../Project/FileManager.h"
 
-class FakeFileManager : FileManager {
+class FakeFileManager : public FileManager {
 public:
+	FakeFileManager();
 protected:
 private:
 };

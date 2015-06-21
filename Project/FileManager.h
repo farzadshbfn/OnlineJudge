@@ -17,8 +17,11 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 #ifndef FILE_MANAGER_H
 #define FILE_MANAGER_H
 
+#include <iostream>
+
 class FileManager {
 public:
+	FileManager(std::string prefixAddress);
 protected:
 private:
 };
