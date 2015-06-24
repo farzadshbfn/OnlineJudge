@@ -28,3 +28,7 @@
 *.app
 
 Database/OnlineJudge.mwb
+
+Database/OnlineJudge.sql
+
+Database/OnlineJudge.mwb.bak
