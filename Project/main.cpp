@@ -16,12 +16,17 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 #include <iostream>
 
-#include "FileManager.h"
-#include "../Fake/FakeFileManager.h"
-#include "Problem.h"
-#include "Judge.h"
+#include "BasicLibraries.h"
+#include "OJManager.h"
+
+#define FOLDER_ROOT_PREFIX_ADDRESS "/Users/farzadshbfn/Desktop/OJ/Fake"
+
+void init() {
+	OJManager::shared_instance()->_fileManager->setPrefixAddress(FOLDER_ROOT_PREFIX_ADDRESS);
+}
 
 int main() {
-	FileManager* fileManager = new FakeFileManager();
+	init();
+	
 	return 0;
 }

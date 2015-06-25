@@ -17,10 +17,17 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 #ifndef JUDGE_H
 #define JUDGE_H
 
+#include "BasicLibraries.h"
+#include "Problem.h"
+
 class Judge {
 public:
-protected:
+	Judge(std::string username, std::string password);
+	
 private:
+	
+	std::string _username;
+	std::string _password;
 };
 
 

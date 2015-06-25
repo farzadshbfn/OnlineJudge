@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E20D40F01B375CC500EE4E23 /* FakeFileManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E20D40E31B375CC500EE4E23 /* FakeFileManager.cpp */; };
-		E20D40F11B375CC500EE4E23 /* FileManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E20D40E91B375CC500EE4E23 /* FileManager.cpp */; };
-		E20D40F21B375CC500EE4E23 /* Judge.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E20D40EB1B375CC500EE4E23 /* Judge.cpp */; };
-		E20D40F31B375CC500EE4E23 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E20D40ED1B375CC500EE4E23 /* main.cpp */; };
-		E20D40F41B375CC500EE4E23 /* Problem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E20D40EE1B375CC500EE4E23 /* Problem.cpp */; };
+		E262AE141B3CB98900D45149 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E29F59A81B3CB9290010B3F5 /* main.cpp */; };
+		E262AE181B3CB9D800D45149 /* FileManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E29F59A21B3CB9290010B3F5 /* FileManager.cpp */; };
+		E262AE191B3CB9D800D45149 /* Judge.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E29F59A41B3CB9290010B3F5 /* Judge.cpp */; };
+		E262AE1A1B3CB9D800D45149 /* JudgeManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E29F59A61B3CB9290010B3F5 /* JudgeManager.cpp */; };
+		E262AE1B1B3CB9D800D45149 /* Problem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E29F59AA1B3CB9290010B3F5 /* Problem.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -27,16 +27,19 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		E20D40E31B375CC500EE4E23 /* FakeFileManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FakeFileManager.cpp; sourceTree = "<group>"; };
-		E20D40E41B375CC500EE4E23 /* FakeFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FakeFileManager.h; sourceTree = "<group>"; };
-		E20D40E91B375CC500EE4E23 /* FileManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FileManager.cpp; sourceTree = "<group>"; };
-		E20D40EA1B375CC500EE4E23 /* FileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileManager.h; sourceTree = "<group>"; };
-		E20D40EB1B375CC500EE4E23 /* Judge.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Judge.cpp; sourceTree = "<group>"; };
-		E20D40EC1B375CC500EE4E23 /* Judge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Judge.h; sourceTree = "<group>"; };
-		E20D40ED1B375CC500EE4E23 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		E20D40EE1B375CC500EE4E23 /* Problem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Problem.cpp; sourceTree = "<group>"; };
-		E20D40EF1B375CC500EE4E23 /* Problem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Problem.h; sourceTree = "<group>"; };
 		E256D6921B375AE0009228C1 /* OJ */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = OJ; sourceTree = BUILT_PRODUCTS_DIR; };
+		E29F59A11B3CB9290010B3F5 /* BasicLibraries.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BasicLibraries.h; sourceTree = "<group>"; };
+		E29F59A21B3CB9290010B3F5 /* FileManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FileManager.cpp; sourceTree = "<group>"; };
+		E29F59A31B3CB9290010B3F5 /* FileManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FileManager.h; sourceTree = "<group>"; };
+		E29F59A41B3CB9290010B3F5 /* Judge.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Judge.cpp; sourceTree = "<group>"; };
+		E29F59A51B3CB9290010B3F5 /* Judge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Judge.h; sourceTree = "<group>"; };
+		E29F59A61B3CB9290010B3F5 /* JudgeManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = JudgeManager.cpp; sourceTree = "<group>"; };
+		E29F59A71B3CB9290010B3F5 /* JudgeManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JudgeManager.h; sourceTree = "<group>"; };
+		E29F59A81B3CB9290010B3F5 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		E29F59A91B3CB9290010B3F5 /* OJManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OJManager.h; sourceTree = "<group>"; };
+		E29F59AA1B3CB9290010B3F5 /* Problem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Problem.cpp; sourceTree = "<group>"; };
+		E29F59AB1B3CB9290010B3F5 /* Problem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Problem.h; sourceTree = "<group>"; };
+		E29F59AD1B3CB9290010B3F5 /* JudgesInfo.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = JudgesInfo.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,60 +53,10 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		E20D40E21B375CC500EE4E23 /* Fake */ = {
-			isa = PBXGroup;
-			children = (
-				E20D40E31B375CC500EE4E23 /* FakeFileManager.cpp */,
-				E20D40E41B375CC500EE4E23 /* FakeFileManager.h */,
-				E20D40E51B375CC500EE4E23 /* Inputs */,
-				E20D40E61B375CC500EE4E23 /* Outputs */,
-				E20D40E71B375CC500EE4E23 /* Submissions */,
-			);
-			name = Fake;
-			path = ../Fake;
-			sourceTree = "<group>";
-		};
-		E20D40E51B375CC500EE4E23 /* Inputs */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Inputs;
-			sourceTree = "<group>";
-		};
-		E20D40E61B375CC500EE4E23 /* Outputs */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Outputs;
-			sourceTree = "<group>";
-		};
-		E20D40E71B375CC500EE4E23 /* Submissions */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Submissions;
-			sourceTree = "<group>";
-		};
-		E20D40E81B375CC500EE4E23 /* Project */ = {
-			isa = PBXGroup;
-			children = (
-				E20D40E91B375CC500EE4E23 /* FileManager.cpp */,
-				E20D40EA1B375CC500EE4E23 /* FileManager.h */,
-				E20D40EB1B375CC500EE4E23 /* Judge.cpp */,
-				E20D40EC1B375CC500EE4E23 /* Judge.h */,
-				E20D40ED1B375CC500EE4E23 /* main.cpp */,
-				E20D40EE1B375CC500EE4E23 /* Problem.cpp */,
-				E20D40EF1B375CC500EE4E23 /* Problem.h */,
-			);
-			name = Project;
-			path = ../Project;
-			sourceTree = "<group>";
-		};
 		E256D6891B375AE0009228C1 = {
 			isa = PBXGroup;
 			children = (
-				E20D40E21B375CC500EE4E23 /* Fake */,
-				E20D40E81B375CC500EE4E23 /* Project */,
+				E29F59A01B3CB9290010B3F5 /* Project */,
 				E256D6941B375AE0009228C1 /* OJ */,
 				E256D6931B375AE0009228C1 /* Products */,
 			);
@@ -122,6 +75,34 @@
 			children = (
 			);
 			path = OJ;
+			sourceTree = "<group>";
+		};
+		E29F59A01B3CB9290010B3F5 /* Project */ = {
+			isa = PBXGroup;
+			children = (
+				E29F59AC1B3CB9290010B3F5 /* Resouces */,
+				E29F59A91B3CB9290010B3F5 /* OJManager.h */,
+				E29F59A11B3CB9290010B3F5 /* BasicLibraries.h */,
+				E29F59A21B3CB9290010B3F5 /* FileManager.cpp */,
+				E29F59A31B3CB9290010B3F5 /* FileManager.h */,
+				E29F59A41B3CB9290010B3F5 /* Judge.cpp */,
+				E29F59A51B3CB9290010B3F5 /* Judge.h */,
+				E29F59A71B3CB9290010B3F5 /* JudgeManager.h */,
+				E29F59A61B3CB9290010B3F5 /* JudgeManager.cpp */,
+				E29F59AA1B3CB9290010B3F5 /* Problem.cpp */,
+				E29F59AB1B3CB9290010B3F5 /* Problem.h */,
+				E29F59A81B3CB9290010B3F5 /* main.cpp */,
+			);
+			name = Project;
+			path = ../Project;
+			sourceTree = "<group>";
+		};
+		E29F59AC1B3CB9290010B3F5 /* Resouces */ = {
+			isa = PBXGroup;
+			children = (
+				E29F59AD1B3CB9290010B3F5 /* JudgesInfo.txt */,
+			);
+			path = Resouces;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -180,11 +161,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E20D40F01B375CC500EE4E23 /* FakeFileManager.cpp in Sources */,
-				E20D40F21B375CC500EE4E23 /* Judge.cpp in Sources */,
-				E20D40F41B375CC500EE4E23 /* Problem.cpp in Sources */,
-				E20D40F31B375CC500EE4E23 /* main.cpp in Sources */,
-				E20D40F11B375CC500EE4E23 /* FileManager.cpp in Sources */,
+				E262AE181B3CB9D800D45149 /* FileManager.cpp in Sources */,
+				E262AE191B3CB9D800D45149 /* Judge.cpp in Sources */,
+				E262AE1A1B3CB9D800D45149 /* JudgeManager.cpp in Sources */,
+				E262AE1B1B3CB9D800D45149 /* Problem.cpp in Sources */,
+				E262AE141B3CB98900D45149 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

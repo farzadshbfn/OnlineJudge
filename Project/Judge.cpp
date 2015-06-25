@@ -16,3 +16,7 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 #include "Judge.h"
 
+Judge::Judge(std::string username, std::string password) {
+	_username = username;
+	_password = password;
+}

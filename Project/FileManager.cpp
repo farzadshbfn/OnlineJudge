@@ -16,7 +16,10 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 #include "FileManager.h"
 
-#include <iostream>
+// MARK: public methods
 
-FileManager::FileManager(std::string prefixAddress) {
+void FileManager::setPrefixAddress(std::string prefixAddress) {
+	_prefixAddress = prefixAddress;
 }
+
+// MARK: private methods

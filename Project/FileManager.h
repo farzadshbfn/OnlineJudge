@@ -17,13 +17,19 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 #ifndef FILE_MANAGER_H
 #define FILE_MANAGER_H
 
-#include <iostream>
+#include "BasicLibraries.h"
 
 class FileManager {
 public:
-	FileManager(std::string prefixAddress);
-protected:
+	/**
+	 set root folder address where all submissions and test datas are saved
+	 @param prefixAddress
+			the root folder address
+	 */
+	void   setPrefixAddress(std::string prefixAddress);
+	FileManager() {}
 private:
+	std::string _prefixAddress;
 };
 
 
