@@ -26,6 +26,9 @@ public:
 	FileManager*  _fileManager;
 	JudgeManager* _judgeManager;
 	
+	/**
+	 @return object shared through all the application
+	 */
 	static OJManager* shared_instance() {
 		static OJManager *sharedInstance = NULL;
 		if (sharedInstance == NULL)

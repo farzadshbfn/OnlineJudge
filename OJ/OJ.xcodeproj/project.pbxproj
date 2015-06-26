@@ -12,6 +12,7 @@
 		E262AE191B3CB9D800D45149 /* Judge.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E29F59A41B3CB9290010B3F5 /* Judge.cpp */; };
 		E262AE1A1B3CB9D800D45149 /* JudgeManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E29F59A61B3CB9290010B3F5 /* JudgeManager.cpp */; };
 		E262AE1B1B3CB9D800D45149 /* Problem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E29F59AA1B3CB9290010B3F5 /* Problem.cpp */; };
+		E262AE1E1B3D306800D45149 /* Submission.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E262AE1C1B3D306800D45149 /* Submission.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,6 +29,8 @@
 
 /* Begin PBXFileReference section */
 		E256D6921B375AE0009228C1 /* OJ */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = OJ; sourceTree = BUILT_PRODUCTS_DIR; };
+		E262AE1C1B3D306800D45149 /* Submission.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Submission.cpp; sourceTree = "<group>"; };
+		E262AE1D1B3D306800D45149 /* Submission.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Submission.h; sourceTree = "<group>"; };
 		E29F59A11B3CB9290010B3F5 /* BasicLibraries.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BasicLibraries.h; sourceTree = "<group>"; };
 		E29F59A21B3CB9290010B3F5 /* FileManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FileManager.cpp; sourceTree = "<group>"; };
 		E29F59A31B3CB9290010B3F5 /* FileManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FileManager.h; sourceTree = "<group>"; };
@@ -91,6 +94,8 @@
 				E29F59A61B3CB9290010B3F5 /* JudgeManager.cpp */,
 				E29F59AA1B3CB9290010B3F5 /* Problem.cpp */,
 				E29F59AB1B3CB9290010B3F5 /* Problem.h */,
+				E262AE1D1B3D306800D45149 /* Submission.h */,
+				E262AE1C1B3D306800D45149 /* Submission.cpp */,
 				E29F59A81B3CB9290010B3F5 /* main.cpp */,
 			);
 			name = Project;
@@ -164,6 +169,7 @@
 				E262AE181B3CB9D800D45149 /* FileManager.cpp in Sources */,
 				E262AE191B3CB9D800D45149 /* Judge.cpp in Sources */,
 				E262AE1A1B3CB9D800D45149 /* JudgeManager.cpp in Sources */,
+				E262AE1E1B3D306800D45149 /* Submission.cpp in Sources */,
 				E262AE1B1B3CB9D800D45149 /* Problem.cpp in Sources */,
 				E262AE141B3CB98900D45149 /* main.cpp in Sources */,
 			);

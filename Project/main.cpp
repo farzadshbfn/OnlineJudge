@@ -16,12 +16,19 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 #include <iostream>
 
+//#define MAC_OS
+
 #include "BasicLibraries.h"
 #include "OJManager.h"
 
-#define FOLDER_ROOT_PREFIX_ADDRESS "/Users/farzadshbfn/Desktop/OJ/Fake"
+#ifdef __APPLE__
+#define FOLDER_ROOT_PREFIX_ADDRESS "/Users/farzadshbfn/Desktop/OJ/JudgeRoots"
+#elif __linux
+#define FOLDER_ROOT_PREFIX_ADDRESS "/home/farzadshbfn/Desktop/OJ/JudgeRoots"
+#endif
 
 void init() {
+	std::cerr << FOLDER_ROOT_PREFIX_ADDRESS << std::endl;
 	OJManager::shared_instance()->_fileManager->setPrefixAddress(FOLDER_ROOT_PREFIX_ADDRESS);
 }
 
