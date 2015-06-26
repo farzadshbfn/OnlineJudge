@@ -20,3 +20,7 @@ Judge::Judge(std::string username, std::string password) {
 	_username = username;
 	_password = password;
 }
+
+void Judge::set_folder_address(std::string folderAddress) {
+	_folderAddress = folderAddress;
+}

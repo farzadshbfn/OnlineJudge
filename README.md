@@ -12,3 +12,5 @@ this code only runs in unix-based computers.
 <h4>consoleError</h4> if running or compiling code encounters any errors, consoleError will provide text error generated
 
 
+<h2> Usage </h2>
+code is not fully dynamic, in order to make it work you need to go to file "<b>Defines.h</b>" and set root folders of specified folders.

@@ -18,16 +18,26 @@
 #define JUDGE_H
 
 #include "BasicLibraries.h"
-#include "Problem.h"
 
 class Judge {
 public:
 	Judge(std::string username, std::string password);
 	
-private:
+	/**
+	 @param folderAddress
+			address of folder dedicated to this judge
+	 */
+	void set_folder_address(std::string folderAddress);
 	
+	/**
+	 @return address of folder dedicated to this judge
+	 */
+	std::string get_folder_address() { return _folderAddress;}
+private:
 	std::string _username;
 	std::string _password;
+	
+	std::string _folderAddress;
 };
 
 

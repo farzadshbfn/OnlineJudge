@@ -24,8 +24,13 @@
 
 void init() {
 	OJManager *sharedInstance = OJManager::shared_instance();
-	sharedInstance->_fileManager->setPrefixFolderAddress(FOLDER_ROOT_FILES);
-	sharedInstance->_judgeManager->setPrefixFolderAddress(FOLDER_ROOT_JUDGES);
+	sharedInstance->_fileManager->set_prefix_folder_address(FOLDER_ROOT_FILES);
+	sharedInstance->_judgeManager->set_prefix_folder_address(FOLDER_ROOT_JUDGES);
+//	Problem problem;
+//	problem._problemName = "1001";
+//	Submission* submission = new Submission();
+//	submission->submissionId = 1001;
+//	sharedInstance->_fileManager->prepare_problem_for_judge_to_test_submission(problem, sharedInstance->_judgeManager->get_available_judge(), submission);
 }
 
 int main() {

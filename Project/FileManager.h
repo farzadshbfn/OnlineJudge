@@ -18,6 +18,17 @@
 #define FILE_MANAGER_H
 
 #include "BasicLibraries.h"
+#include "JudgeManager.h"
+
+struct Problem {
+	std::string _problemName;
+};
+
+struct Submission {
+	size_t      submissionId;
+	std::string submissionAddress;
+};
+
 
 class FileManager {
 public:
@@ -28,18 +39,35 @@ public:
 	 @param prefixAddress
 	 the root folder address
 	 */
-	void setPrefixFolderAddress(std::string prefixFolderAddress);
+	void set_prefix_folder_address(std::string prefixFolderAddress);
 	
 	
 	/**
 	 @return root folder that contains submissions and testdatas
 	 */
-	std::string getPrefixFolderAddress() { return _prefixAddress;}
+	std::string get_prefix_folder_address() { return _prefixAddress;}
 	
 	
+	/**
+	 clears the folder dedicated to judge. fills it with testdata of problem, submission
+	 and it's runnable version
+	 @param problem
+			is needed for problemID to fetch all testdata
+	 @param judge
+			is needed to copy contents of problen into the folder dedicated for this judge
+	 @param submission
+			submited code which is about to be tested
+	 */
+	void prepare_problem_for_judge_to_test_submission
+	(Problem problem, Judge* judge, Submission *submission);
 private:
 	std::string _prefixAddress;
 };
 
 
 #endif /* FILE_MANAGER_H */
+
+
+
+
+

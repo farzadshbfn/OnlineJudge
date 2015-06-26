@@ -23,25 +23,27 @@
 
 class JudgeManager {
 public:
-	/**
-	 default constructor will read username/password data from the file "JudgesInfo.txt"
-	 located in Resources folder.
-	 */
-	JudgeManager() {}
+	JudgeManager();
 	/**
 	 set root folder address where all submissions and test datas are saved
 	 @param prefixAddress
 	 the root folder address
 	 */
-	void setPrefixFolderAddress(std::string prefixAddress);
+	void set_prefix_folder_address(std::string prefixAddress);
 	/**
 	 @return root folder that contains judges folder
 	 */
-	std::string getPrefixFolderAddress() { return _prefixFolderAddress;}
+	std::string get_prefix_folder_address() { return _prefixFolderAddress;}
 	
+	Judge* get_available_judge();
 private:
 	std::string _prefixFolderAddress;
 	std::vector<Judge*> _judges;
+	
+	/**
+	 load judges
+	 */
+	void load_judges();
 };
 
 #endif /* defined(__OJ__JudgeManager__) */
