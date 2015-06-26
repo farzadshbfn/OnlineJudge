@@ -14,4 +14,27 @@
  OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-#include "JudgeManager.h"
+#ifndef OJ_TerminalManager_h
+#define OJ_TerminalManager_h
+
+#include <string>
+#include <iostream>
+#include <stdio.h>
+
+namespace terminal {
+	std::string system(std::string cmd) {
+		FILE* pipe = popen(cmd.c_str(), "r");
+		if (!pipe) return "ERROR";
+		char buffer[128];
+		std::string result = "";
+		while(!feof(pipe)) {
+			if(fgets(buffer, 128, pipe) != NULL)
+				result += buffer;
+		}
+		pclose(pipe);
+		return result;
+	}
+	
+}
+
+#endif

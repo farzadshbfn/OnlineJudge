@@ -1,5 +1,6 @@
 # OnlineJudge
 C++ code for filtering/sorting problem test datas and run the submitted code and check the results.
+this code only runs in unix-based computers.
 
 <h2> command line API </h2>
 <h3> input </h3>

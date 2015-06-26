@@ -28,7 +28,20 @@ public:
 	 located in Resources folder.
 	 */
 	JudgeManager() {}
+	/**
+	 set root folder address where all submissions and test datas are saved
+	 @param prefixAddress
+	 the root folder address
+	 */
+	void setPrefixFolderAddress(std::string prefixAddress);
+	/**
+	 @return root folder that contains judges folder
+	 */
+	std::string getPrefixFolderAddress() { return _prefixFolderAddress;}
+	
 private:
+	std::string _prefixFolderAddress;
+	std::vector<Judge*> _judges;
 };
 
 #endif /* defined(__OJ__JudgeManager__) */

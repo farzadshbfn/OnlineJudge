@@ -19,6 +19,7 @@
 
 #include "FileManager.h"
 #include "JudgeManager.h"
+#include "TerminalManager.h"
 
 class OJManager {
 public:

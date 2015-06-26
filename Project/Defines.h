@@ -14,32 +14,25 @@
  OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-#ifndef FILE_MANAGER_H
-#define FILE_MANAGER_H
+#ifndef OJ_Defines_h
+#define OJ_Defines_h
 
-#include "BasicLibraries.h"
+#ifdef __APPLE__
+#define FOLDER_ROOT_FILES "/Users/farzadshbfn/Desktop/OJ/Fake"
+#elif __linux
+#define FOLDER_ROOT_FILES "/home/farzadshbfn/Desktop/OJ/Fake"
+#endif
 
-class FileManager {
-public:
-	FileManager() {}
-	
-	/**
-	 set root folder address where all submissions and test datas are saved
-	 @param prefixAddress
-	 the root folder address
-	 */
-	void setPrefixFolderAddress(std::string prefixFolderAddress);
-	
-	
-	/**
-	 @return root folder that contains submissions and testdatas
-	 */
-	std::string getPrefixFolderAddress() { return _prefixAddress;}
-	
-	
-private:
-	std::string _prefixAddress;
-};
+#ifdef __APPLE__
+#define FOLDER_ROOT_JUDGES "/Users/farzadshbfn/Desktop/OJ/JudgeRoots"
+#elif __linux
+#define FOLDER_ROOT_JUDGES "/home/farzadshbfn/Desktop/OJ/JudgeRoots"
+#endif
 
+#ifdef __APPLE__
+#define FOLDER_ROOT_PROJECT "/Users/farzadshbfn/Desktop/OJ/Project"
+#elif __linux
+#define FOLDER_ROOT_PROJECT "/home/farzadshbfn/Desktop/OJ/Project"
+#endif
 
-#endif /* FILE_MANAGER_H */
+#endif
