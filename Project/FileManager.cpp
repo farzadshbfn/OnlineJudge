@@ -36,7 +36,7 @@ void FileManager::prepare_problem_for_judge_to_test_submission
 	
 	// move all testdata into judge folder
 	std::string moveTestDataCmd = "find " + _prefixAddress;
-	moveTestDataCmd += "/Testdata/" + problem._problemName + "_*.*";
+	moveTestDataCmd += "/Testdata/" + problem.problemName + "_*.*";
 	moveTestDataCmd += " -exec cp -t ";
 	moveTestDataCmd += judge->get_folder_address();
 	moveTestDataCmd += "/ {} \\+";

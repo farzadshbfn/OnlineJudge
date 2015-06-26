@@ -20,7 +20,9 @@
 #include "BasicLibraries.h"
 
 struct Problem {
-	std::string _problemName;
+	std::string problemName;
+	int         memoryLimit;
+	float       timeLimit;
 };
 
 struct Submission {

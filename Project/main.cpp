@@ -25,7 +25,7 @@
 void test() {
 	OJManager *sharedInstance = OJManager::shared_instance();
 	Problem problem;
-	problem._problemName = "1001";
+	problem.problemName = "1001";
 	
 	Submission submission;
 	submission.submissionId = 1001;
