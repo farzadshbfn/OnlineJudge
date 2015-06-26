@@ -41,6 +41,11 @@ public:
 	 get fileType
 	 */
 	virtual std::string get_file_type() = 0;
+	
+	/**
+	 get executable file name.
+	 */
+	virtual std::string get_excute_command_localized() = 0;
 };
 
 // MARK: Compilers
@@ -51,6 +56,7 @@ public:
 	std::string generate_run_command(std::string submitAddress) override;
 	std::string get_executable_file_address(std::string submitAddress) override;
 	std::string get_file_type() override;
+	std::string get_excute_command_localized() override;
 };
 
 class CompilerGcc: public ICompiler {
@@ -59,6 +65,7 @@ public:
 	std::string generate_run_command(std::string submitAddress) override;
 	std::string get_executable_file_address(std::string submitAddress) override;
 	std::string get_file_type() override;
+	std::string get_excute_command_localized() override;
 };
 
 class CompilerJava: public ICompiler {
@@ -67,6 +74,7 @@ public:
 	std::string generate_run_command(std::string submitAddress) override;
 	std::string get_executable_file_address(std::string submitAddress) override;
 	std::string get_file_type() override;
+	std::string get_excute_command_localized() override;
 };
 
 

@@ -18,6 +18,7 @@
 #define JUDGE_H
 
 #include "BasicLibraries.h"
+#include "Compilers.h"
 
 struct Problem {
 	std::string problemName;
@@ -65,6 +66,11 @@ private:
 	std::string _password;
 	
 	std::string _folderAddress;
+	
+	/**
+	 the real deal
+	 */
+	std::string run_test_cases(Problem problem, Submission& submission);
 };
 
 

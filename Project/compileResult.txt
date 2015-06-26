@@ -1,0 +1,4 @@
+/home/farzadshbfn/Desktop/OJ/JudgeRoots/judge1/1001.cpp: In function ‘int main()’:
+/home/farzadshbfn/Desktop/OJ/JudgeRoots/judge1/1001.cpp:9:2: error: expected ‘;’ before ‘return’
+  return 0;
+  ^

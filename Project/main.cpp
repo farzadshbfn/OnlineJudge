@@ -32,7 +32,8 @@ void test() {
 	
 	Judge* judge = sharedInstance->_judgeManager->get_available_judge();
 	
-	judge->judge_problem(problem, submission);
+	std::string result = judge->judge_problem(problem, submission);
+	std::cerr << result << std::endl;
 }
 
 void init() {

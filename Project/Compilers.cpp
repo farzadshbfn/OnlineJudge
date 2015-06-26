@@ -37,6 +37,10 @@ std::string CompilerGpp::get_file_type() {
 	return "cpp";
 }
 
+std::string CompilerGpp::get_excute_command_localized() {
+	return "./a.out";
+}
+
 
 // MARK: CompilerGcc
 std::string CompilerGcc::generate_compile_command(std::string submitAddress) {
@@ -57,6 +61,10 @@ std::string CompilerGcc::get_executable_file_address(std::string submitAddress) 
 
 std::string CompilerGcc::get_file_type() {
 	return "c";
+}
+
+std::string CompilerGcc::get_excute_command_localized() {
+	return "./a.out";
 }
 
 // MARK: CompilerJava
@@ -82,6 +90,10 @@ std::string CompilerJava::get_executable_file_address(std::string submitAddress)
 
 std::string CompilerJava::get_file_type() {
 	return "java";
+}
+
+std::string CompilerJava::get_excute_command_localized() {
+	return "java Main";
 }
 
 // MARK: CompilerManager
