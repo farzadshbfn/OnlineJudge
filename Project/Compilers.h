@@ -25,34 +25,34 @@ public:
 };
 
 class CompilerGpp: public ICompiler {
-	virtual std::string generateCompileCommand(std::string submitAddress) {
+	std::string generateCompileCommand(std::string submitAddress) override {
 		std::string command;
 		return command;
 	}
 	
-	virtual int runCompiledCode() {
+	int runCompiledCode() override {
 		return 0;
 	}
 };
 
 class CompileGcc: public ICompiler {
-	virtual std::string generateCompileCommand(std::string submitAddress) {
+	std::string generateCompileCommand(std::string submitAddress) override {
 		std::string command;
 		return command;
 	}
 	
-	virtual int runCompiledCode() {
+	int runCompiledCode() override {
 		return 0;
 	}
 };
 
 class CompileJava: public ICompiler {
-	virtual std::string generateCompileCommand(std::string submitAddress) {
+	std::string generateCompileCommand(std::string submitAddress) override {
 		std::string command;
 		return command;
 	}
 	
-	virtual int runCompiledCode() {
+	int runCompiledCode() override {
 		return 0;
 	}
 };
