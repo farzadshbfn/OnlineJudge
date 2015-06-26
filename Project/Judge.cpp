@@ -18,6 +18,12 @@
 #include "OJManager.h"
 #include <fstream>
 
+#include <unistd.h>
+#include <fcntl.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <sys/wait.h>
+
 Judge::Judge(std::string username, std::string password) {
 	_username = username;
 	_password = password;
@@ -29,6 +35,31 @@ void Judge::set_folder_address(std::string folderAddress) {
 
 bool Judge::is_busy() {
 	return 0;
+}
+
+
+void run_test_commands(std::vector<std::pair<std::string, std::string> >& files, std::string runnableFileAddress) {
+	for (int i = 0; i < files.size(); i++) {
+		pid_t child_pid = fork();
+		if (child_pid == 0) { //child
+			uid_t user = 1001;
+			setuid(user);
+			
+			int in, out;
+			in = open(files[i].first.c_str(), O_RDONLY);
+			out = open(files[i].second.c_str(), O_WRONLY | O_TRUNC | O_CREAT, S_IRUSR | S_IRGRP | S_IWGRP | S_IWUSR);
+			
+			dup2(in, 0);
+			dup2(out, 1);
+			close(in);
+			close(out);
+			char* args[] = {NULL};
+			execvp(runnableFileAddress.c_str(), args);
+		}
+		else {
+			waitpid(child_pid, NULL, 0);
+		}
+	}
 }
 
 std::string Judge::run_test_cases(Problem problem, Submission& submission) {
@@ -60,18 +91,25 @@ std::string Judge::run_test_cases(Problem problem, Submission& submission) {
 	_compilerManager->
 	get_suitable_compiler(submission.submissionAddress);
 	
+//	std::vector<std::string> commands;
+	std::vector<std::pair<std::string, std::string> > files;
 	// TODO: check later for problem with no input
 	for (int i = 0; i < inputs.size(); i++) {
-		// TODO: check for runtime
-		std::string testCommand = "cd " + this->get_folder_address() + "; ";
-		testCommand += "sudo -u " + this->_username + " ";
-		testCommand += compiler->get_excute_command_localized();
-		testCommand += " <" + inputs[i];
+//		std::string testCommand = "cd " + this->get_folder_address() + "; ";
+//		testCommand += "sudo -u " + this->_username + " ";
+//		testCommand += compiler->get_excute_command_localized();
+//		testCommand += " <" + inputs[i];
 		std::stringstream ss;
 		ss << i;
-		testCommand += " >u_" + ss.str() + ".out";
-		terminal::system(testCommand);
+//		testCommand += " >u_" + ss.str() + ".out";
+//		commands.push_back(testCommand);
+		std::string inputFile = this->get_folder_address() + "/" + inputs[i];
+		std::string userOut = this->get_folder_address() + "/" + "u_" + ss.str() + ".out";
+		files.push_back(std::make_pair(inputFile, userOut));
 	}
+	
+	run_test_commands(files, compiler->get_executable_file_address(submission.submissionAddress));
+	
 	int accepted = 0;
 	for (int i = 0; i < outputs.size(); i++) {
 		std::string compareCommand = "cd " + this->get_folder_address() + "; ";
