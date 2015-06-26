@@ -30,8 +30,11 @@ std::string int_to_string(int number) {
 }
 
 void FileManager::prepare_problem_for_judge_to_test_submission
-(Problem problem, Judge* judge, Submission *submission) {
+(Problem problem, Judge* judge, Submission& submission) {
+	// remove all fils in judge folder
 	terminal::system("rm " + judge->get_folder_address() + "/*.*");
+	
+	// move all testdata into judge folder
 	std::string moveTestDataCmd = "find " + _prefixAddress;
 	moveTestDataCmd += "/Testdata/" + problem._problemName + "_*.*";
 	moveTestDataCmd += " -exec cp -t ";
@@ -39,12 +42,20 @@ void FileManager::prepare_problem_for_judge_to_test_submission
 	moveTestDataCmd += "/ {} \\+";
 	terminal::system(moveTestDataCmd);
 	
+	// move submission
 	std::string moveSubmission = "find " + _prefixAddress;
-	moveSubmission += "/Submissions/" + int_to_string((int)submission->submissionId) + ".*";
+	moveSubmission += "/Submissions/" + int_to_string((int)submission.submissionId) + ".*";
+	
+	// before moving submission completely, catch it's name
+	std::string submissionFileAddress = terminal::system(moveSubmission);
+	submissionFileAddress = submissionFileAddress.substr(0, int(submissionFileAddress.size())-1);
+	size_t pos = submissionFileAddress.find_last_of('/');
+	std::string submissionName = submissionFileAddress.substr(pos+1);
+	
 	moveSubmission += " -exec cp -t ";
 	moveSubmission += judge->get_folder_address();
 	moveSubmission += "/ {} \\+";
 	std::string sub = terminal::system(moveSubmission);
-	std::cerr << sub << std::endl;
+	submission.submissionAddress = judge->get_folder_address() + "/" + submissionName;
 }
 // MARK: private methods

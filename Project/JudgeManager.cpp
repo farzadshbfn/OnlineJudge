@@ -38,9 +38,11 @@ Judge* JudgeManager::get_available_judge() {
 void JudgeManager::load_judges() {
 	_judges.clear();
 	
+	// address to where judge infos are saved
 	std::string fileAddress = FOLDER_ROOT_PROJECT;
 	fileAddress += "/Resources/JudgesInfo.txt";
 	
+	// open the file, and read from it
 	std::ifstream fs(fileAddress.c_str());
 	if (fs.is_open()) {
 		std::string line;

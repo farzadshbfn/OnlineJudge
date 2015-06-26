@@ -20,13 +20,14 @@
 #include "FileManager.h"
 #include "JudgeManager.h"
 #include "TerminalManager.h"
+#include "Compilers.h"
 
 class OJManager {
 public:
 	
-	FileManager*  _fileManager;
-	JudgeManager* _judgeManager;
-	
+	FileManager*      _fileManager;
+	JudgeManager*     _judgeManager;
+	CompilerManager*  _compilerManager;
 	/**
 	 @return object shared through all the application
 	 */
@@ -42,6 +43,7 @@ private:
 	OJManager() {
 		_fileManager = new FileManager();
 		_judgeManager = new JudgeManager();
+		_compilerManager = CompilerManager::shared_instance();
 	}
 };
 

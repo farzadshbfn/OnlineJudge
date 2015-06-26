@@ -20,16 +20,6 @@
 #include "BasicLibraries.h"
 #include "JudgeManager.h"
 
-struct Problem {
-	std::string _problemName;
-};
-
-struct Submission {
-	size_t      submissionId;
-	std::string submissionAddress;
-};
-
-
 class FileManager {
 public:
 	FileManager() {}
@@ -59,7 +49,7 @@ public:
 			submited code which is about to be tested
 	 */
 	void prepare_problem_for_judge_to_test_submission
-	(Problem problem, Judge* judge, Submission *submission);
+	(Problem problem, Judge* judge, Submission& submission);
 private:
 	std::string _prefixAddress;
 };

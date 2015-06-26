@@ -15,6 +15,7 @@
  */
 
 #include "Judge.h"
+#include "OJManager.h"
 
 Judge::Judge(std::string username, std::string password) {
 	_username = username;
@@ -24,3 +25,38 @@ Judge::Judge(std::string username, std::string password) {
 void Judge::set_folder_address(std::string folderAddress) {
 	_folderAddress = folderAddress;
 }
+
+bool Judge::is_busy() {
+	return 0;
+}
+
+std::string run_test_cases(ICompiler* compiler, Problem problem, Submission& submission) {
+	return "";
+}
+
+std::string Judge::judge_problem(Problem problem, Submission submission) {
+	std::string result;
+	OJManager* sharedInstance = OJManager::shared_instance();
+	sharedInstance->_fileManager->prepare_problem_for_judge_to_test_submission(problem, this, submission);
+	ICompiler* compiler = sharedInstance->_compilerManager->get_suitable_compiler(submission.submissionAddress);
+//	std::cerr << compiler->generate_compile_command(submission.submissionAddress) << std::endl;
+//	std::cerr << compiler->generate_run_command(submission.submissionAddress) << std::endl;
+	std::string compileResult = terminal::system(compiler->generate_compile_command(submission.submissionAddress));
+	
+	// check if file exists
+	std::string fileExistCommand = "test -f " + compiler->get_executable_file_address(submission.submissionAddress) + "; echo $?";
+	std::string checkResult = terminal::system(fileExistCommand);
+	checkResult = checkResult.substr(0, 1);
+	
+	if (checkResult == "0") // exists
+		return run_test_cases(compiler, problem, submission);
+	
+	return result;
+}
+
+
+
+
+
+
+

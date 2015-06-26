@@ -19,6 +19,16 @@
 
 #include "BasicLibraries.h"
 
+struct Problem {
+	std::string _problemName;
+};
+
+struct Submission {
+	size_t      submissionId;
+	std::string submissionAddress;
+};
+
+
 class Judge {
 public:
 	Judge(std::string username, std::string password);
@@ -33,6 +43,21 @@ public:
 	 @return address of folder dedicated to this judge
 	 */
 	std::string get_folder_address() { return _folderAddress;}
+	
+	/**
+	 well, it's onlinejudge after all!
+	 @param problem
+			problem to be judged
+	 @param submissoin
+			submission to judge problem with
+	 @return result of judge
+	 */
+	std::string judge_problem(Problem problem, Submission submission);
+	
+	/**
+	 determins if this judge is ready to judge a problem or not
+	 */
+	bool is_busy();
 private:
 	std::string _username;
 	std::string _password;
