@@ -41,6 +41,12 @@ std::string CompilerGpp::get_excute_command_localized() {
 	return "./a.out";
 }
 
+char** CompilerGpp::get_argv(std::string submitAddress) {
+	static char** argv = new char*[1];
+	argv[0] = NULL;
+	return argv;
+}
+
 
 // MARK: CompilerGcc
 std::string CompilerGcc::generate_compile_command(std::string submitAddress) {
@@ -65,6 +71,12 @@ std::string CompilerGcc::get_file_type() {
 
 std::string CompilerGcc::get_excute_command_localized() {
 	return "./a.out";
+}
+
+char** CompilerGcc::get_argv(std::string submitAddress) {
+	static char** argv = new char*[1];
+	argv[0] = NULL;
+	return argv;
 }
 
 // MARK: CompilerJava
@@ -94,6 +106,15 @@ std::string CompilerJava::get_file_type() {
 
 std::string CompilerJava::get_excute_command_localized() {
 	return "java Main";
+}
+
+char** CompilerJava::get_argv(std::string submitAddress) {
+	static char** argv = new char*[1];
+	std::string exc = this->get_executable_file_address(submitAddress);
+	argv[0] = new char[exc.size()];
+	std::copy(exc.begin(), exc.end(), argv[0]);
+	argv[1] = NULL;
+	return argv;
 }
 
 // MARK: CompilerManager

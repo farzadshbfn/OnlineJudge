@@ -25,6 +25,9 @@
 #include <sys/wait.h>
 #include <sys/shm.h>
 #include <sys/resource.h>
+#include <sys/time.h>
+#include <string.h>
+#include <signal.h>
 
 Judge::Judge(std::string username, std::string password) {
 	_username = username;
@@ -40,10 +43,34 @@ bool Judge::is_busy() {
 }
 
 
-void run_test_commands(std::vector<std::pair<std::string, std::string> >& files, std::string runnableFileAddress, Problem problem,Information &information) {
-	int shmid;
+void timer_handler(int sig) {
+	fprintf(stdout, "test + %d\n", getpid());
+//	exit(5);
+}
+
+void run_test_commands(std::vector<std::pair<std::string, std::string> >& files, std::string runnableFileAddress, Problem problem,Information &information, Submission &sub) {
+//	int shmid;
 //	shmid = shmget(IPC_PRIVATE, sizeof(Information), 0666 | IPC_CREAT);
 //	void *data = shmat(shmid, (void*)0, 0);
+	
+//	struct sigaction sa;
+//	struct itimerval timer;
+//	
+//	/* Install timer_handler as the signal handler for SIGVTALRM. */
+//	memset (&sa, 0, sizeof (sa));
+//	sa.sa_handler = &timer_handler;
+//	sigaction (SIGALRM, &sa, NULL);
+//	
+//	/* Configure the timer to expire after 250 msec... */
+//	timer.it_value.tv_sec = 0;
+//	timer.it_value.tv_usec = 250000;
+//	/* ... and every 250 msec after that. */
+//	timer.it_interval.tv_sec = 0;
+//	timer.it_interval.tv_usec = 250000;
+//	/* Start a virtual timer. It counts down whenever this process is
+//	 executing. */
+//	setitimer (ITIMER_REAL, &timer, NULL);
+
 	for (int i = 0; i < files.size(); i++) {
 		pid_t child_pid = fork();
 		if (child_pid == 0) { //child
@@ -71,8 +98,9 @@ void run_test_commands(std::vector<std::pair<std::string, std::string> >& files,
 			dup2(out, 1);
 			close(in);
 			close(out);
-			char* args[] = {NULL};
-			execvp(runnableFileAddress.c_str(), args);
+			ICompiler *compiler = OJManager::shared_instance()->_compilerManager->get_suitable_compiler(sub.submissionAddress);
+			char** argv = compiler->get_argv(sub.submissionAddress);
+			execvp(runnableFileAddress.c_str(), argv);
 		}
 		else {
 			
@@ -124,7 +152,7 @@ std::string Judge::run_test_cases(Problem problem, Submission& submission) {
 		files.push_back(std::make_pair(inputFile, userOut));
 	}
 	Information info;
-	run_test_commands(files, compiler->get_executable_file_address(submission.submissionAddress), problem, info);
+	run_test_commands(files, compiler->get_executable_file_address(submission.submissionAddress), problem, info, submission);
 	
 	info.totalProblem = outputs.size();
 	for (int i = 0; i < outputs.size(); i++) {

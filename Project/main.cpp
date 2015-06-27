@@ -42,8 +42,35 @@ void init() {
 	sharedInstance->_judgeManager->set_prefix_folder_address(FOLDER_ROOT_JUDGES);
 }
 
+void cmd() {
+	std::string line;
+	while (std::getline(std::cin, line)) {
+		std::stringstream ss;
+		ss << line;
+		ss >> line;
+		if (line == "submit") {
+			size_t subId, timeLimit, memLimit;
+			std::string probName;
+			ss >> subId >> probName >> timeLimit >> memLimit;
+			Submission sub;
+			sub.submissionId = subId;
+			Problem prob;
+			prob.problemName = probName;
+			prob.timeLimit = timeLimit;
+			prob.memoryLimit = memLimit;
+			
+			Judge *judge = OJManager::shared_instance()->_judgeManager->get_available_judge();
+			std::string res = judge->judge_problem(prob, sub);
+			std::cout << res << std::endl;
+		}
+		else if (line == "exit")
+			return;
+	}
+}
+
 int main() {
 	init();
-	test();
+//	test();
+	cmd();
 	return 0;
 }

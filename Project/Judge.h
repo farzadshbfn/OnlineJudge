@@ -22,8 +22,8 @@
 
 struct Problem {
 	std::string problemName;
-	int         memoryLimit;
-	float       timeLimit;
+	size_t         memoryLimit;
+	size_t       timeLimit;
 };
 
 struct Submission {
