@@ -24,6 +24,7 @@
 #include <sys/stat.h>
 #include <sys/wait.h>
 #include <sys/shm.h>
+#include <sys/resource.h>
 
 Judge::Judge(std::string username, std::string password) {
 	_username = username;
@@ -39,16 +40,28 @@ bool Judge::is_busy() {
 }
 
 
-void run_test_commands(std::vector<std::pair<std::string, std::string> >& files, std::string runnableFileAddress) {
+void run_test_commands(std::vector<std::pair<std::string, std::string> >& files, std::string runnableFileAddress, Problem problem,Information &information) {
 	int shmid;
-	shmid = shmget(IPC_PRIVATE, sizeof(Information), 0666 | IPC_CREAT);
-	void *data = shmat(shmid, (void*)0, 0);
+//	shmid = shmget(IPC_PRIVATE, sizeof(Information), 0666 | IPC_CREAT);
+//	void *data = shmat(shmid, (void*)0, 0);
 	for (int i = 0; i < files.size(); i++) {
 		pid_t child_pid = fork();
 		if (child_pid == 0) { //child
-			void *data2 = shmat(shmid, (void*)0, 0);
+//			void *data2 = shmat(shmid, (void*)0, 0);
 			uid_t user = 1001;
 			setuid(user);
+			
+			struct rlimit mlimit;
+			mlimit.rlim_cur = problem.memoryLimit;
+			mlimit.rlim_max = mlimit.rlim_cur;
+			::setrlimit(RLIMIT_DATA, &mlimit);
+			
+			
+			struct rlimit climit;
+			climit.rlim_cur = 1;
+			climit.rlim_max = mlimit.rlim_cur;
+			::setrlimit(RLIMIT_CPU, &mlimit);
+			
 			
 			int in, out;
 			in = open(files[i].first.c_str(), O_RDONLY);
@@ -63,7 +76,12 @@ void run_test_commands(std::vector<std::pair<std::string, std::string> >& files,
 		}
 		else {
 			
-			waitpid(child_pid, NULL, 0);
+			int childRes;
+			waitpid(child_pid, &childRes, 0);
+			if (childRes != 0) {
+				information.runtimeError = 1;
+				break;
+			}
 		}
 	}
 }
@@ -105,10 +123,10 @@ std::string Judge::run_test_cases(Problem problem, Submission& submission) {
 		std::string userOut = this->get_folder_address() + "/" + "u_" + ss.str() + ".out";
 		files.push_back(std::make_pair(inputFile, userOut));
 	}
+	Information info;
+	run_test_commands(files, compiler->get_executable_file_address(submission.submissionAddress), problem, info);
 	
-	run_test_commands(files, compiler->get_executable_file_address(submission.submissionAddress));
-	
-	int accepted = 0;
+	info.totalProblem = outputs.size();
 	for (int i = 0; i < outputs.size(); i++) {
 		std::string compareCommand = "cd " + this->get_folder_address() + "; ";
 		compareCommand += "diff " + outputs[i] + " ";
@@ -118,15 +136,18 @@ std::string Judge::run_test_cases(Problem problem, Submission& submission) {
 		std::string compResult = terminal::system(compareCommand);
 		compResult = compResult.substr(0, int(compResult.size())-1);
 		if (compResult == "")
-			accepted++;
+			info.accepted++;
 	}
 	std::string result;
-	if (accepted == outputs.size())
+	if (info.accepted == outputs.size())
 		result = "Accepted";
+	else if (info.runtimeError) {
+		result = "Runtime Error";
+	}
 	else {
-		result = "WrongAnswer ";
+		result = "Wrong Answer ";
 		std::stringstream ss;
-		ss << accepted << "/" << outputs.size();
+		ss << info.accepted << "/" << outputs.size();
 		result += ss.str();
 	}
 	return result;

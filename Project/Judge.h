@@ -38,6 +38,14 @@ struct Information {
 	bool runtimeError;
 	int time;
 	int memory;
+	
+	Information() {
+		totalProblem = 0;
+		accepted = 0;
+		runtimeError = 0;
+		time = 0;
+		memory = 0;
+	}
 };
 
 class Judge {
