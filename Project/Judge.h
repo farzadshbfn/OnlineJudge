@@ -32,6 +32,14 @@ struct Submission {
 };
 
 
+struct Information {
+	int totalProblem;
+	int accepted;
+	bool runtimeError;
+	int time;
+	int memory;
+};
+
 class Judge {
 public:
 	Judge(std::string username, std::string password);
