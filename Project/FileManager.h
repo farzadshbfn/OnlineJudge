@@ -25,20 +25,16 @@ public:
 	FileManager() {}
 	
 	/**
-	 set root folder address where all submissions and test datas are saved
-	 @param prefixAddress
-	 the root folder address
+	 root folder address where all submissions are saved
 	 */
-	void set_prefix_folder_address(std::string prefixFolderAddress);
-	
+	std::string _submissionsFolder;
+	/**
+	 root folder address where all testdatas are saved
+	 */
+	std::string _testdatasFolder;
 	
 	/**
-	 @return root folder that contains submissions and testdatas
-	 */
-	std::string get_prefix_folder_address() { return _prefixAddress;}
-	
-	
-	/**
+	 ***: set _submissionsFolder & _testdatasFolder before calling this method
 	 clears the folder dedicated to judge. fills it with testdata of problem, submission
 	 and it's runnable version
 	 @param problem
@@ -48,10 +44,14 @@ public:
 	 @param submission
 			submited code which is about to be tested
 	 */
-	void prepare_problem_for_judge_to_test_submission
+	void move_testdata_submission_to_judgeFolder
 	(Problem problem, Judge* judge, Submission& submission);
+	
 private:
-	std::string _prefixAddress;
+	void clear_folder   (std::string address);
+	void move_inputs    (std::string problemName, std::string address);
+	void move_outputs   (std::string problemName, std::string address);
+	void move_submission(std::string  submission, std::string address);
 };
 
 

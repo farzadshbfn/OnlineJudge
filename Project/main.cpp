@@ -30,16 +30,16 @@ void test() {
 	Submission submission;
 	submission.submissionId = 1001;
 	
-	Judge* judge = sharedInstance->_judgeManager->get_available_judge();
+	Judge* judge = sharedInstance->_judgeManager->get_a_judge();
 	
-	std::string result = judge->judge_problem(problem, submission);
-	std::cerr << result << std::endl;
+//	std::string result = judge->judge_problem(problem, submission);
 }
 
 void init() {
 	OJManager *sharedInstance = OJManager::shared_instance();
-	sharedInstance->_fileManager->set_prefix_folder_address(FOLDER_ROOT_FILES);
-	sharedInstance->_judgeManager->set_prefix_folder_address(FOLDER_ROOT_JUDGES);
+	sharedInstance->_fileManager->_submissionsFolder = FOLDER_ROOT_SUBMISSIONS;
+	sharedInstance->_fileManager->_testdatasFolder   = FOLDER_ROOT_TESTDATAS;
+	sharedInstance->_judgeManager->set_judgesTempFolders(FOLDER_ROOT_JUDGESTEMP);
 }
 
 int main() {

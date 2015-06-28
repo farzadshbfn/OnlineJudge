@@ -22,10 +22,6 @@
 #include <stdio.h>
 
 namespace terminal {
-	/**
-	 IMPORTANT
-	 use this method instead of std::system, because we need to keep pipe clean
-	 */
 	inline std::string system(std::string cmd) {
 		FILE* pipe = popen(cmd.c_str(), "r");
 		if (!pipe) return "ERROR";

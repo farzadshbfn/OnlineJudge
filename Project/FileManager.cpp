@@ -18,18 +18,7 @@
 #include "TerminalManager.h"
 
 // MARK: public methods
-
-void FileManager::set_prefix_folder_address(std::string prefixFolderAddress) {
-	_prefixAddress = prefixFolderAddress;
-}
-
-std::string int_to_string(int number) {
-	std::stringstream ss;
-	ss << number;
-	return ss.str();
-}
-
-void FileManager::prepare_problem_for_judge_to_test_submission
+void FileManager::move_testdata_submission_to_judgeFolder
 (Problem problem, Judge* judge, Submission& submission) {
 	// remove all fils in judge folder
 	terminal::system("rm " + judge->get_folder_address() + "/*.*");
@@ -58,4 +47,18 @@ void FileManager::prepare_problem_for_judge_to_test_submission
 	std::string sub = terminal::system(moveSubmission);
 	submission.submissionAddress = judge->get_folder_address() + "/" + submissionName;
 }
-// MARK: private methods
+
+void FileManager::clear_folder(std::string address) {
+}
+
+void FileManager::move_inputs(std::string problemName, std::string address) {
+	std::string cmd = "find " + address
+}
+
+void FileManager::move_outputs(std::string problemName, std::string address) {
+}
+
+void FileManager::move_submission(std::string  submission, std::string address) {
+}
+
+

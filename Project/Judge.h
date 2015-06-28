@@ -19,34 +19,25 @@
 
 #include "BasicLibraries.h"
 #include "Compilers.h"
-
-struct Problem {
-	std::string problemName;
-	int         memoryLimit;
-	float       timeLimit;
-};
-
-struct Submission {
-	size_t      submissionId;
-	std::string submissionAddress;
-};
+#include "Structs.h"
 
 
 class Judge {
 public:
-	Judge(std::string username, std::string password);
+	Judge(std::string username) { _username = username;}
 	
 	/**
-	 @param folderAddress
-			address of folder dedicated to this judge
+	 holds address to judge temp folder
 	 */
-	void set_folder_address(std::string folderAddress);
+	std::string _folderAddress;
 	
 	/**
-	 @return address of folder dedicated to this judge
-	 */
-	std::string get_folder_address() { return _folderAddress;}
-	
+	 set _folderAddress before calling below functions
+	*/
+	std::string get_judgeFolder()   { return _folderAddress;}
+	std::string get_inputsFolder()  { return _folderAddress + "/inputs";}
+	std::string get_outputsFolder() { return _folderAddress + "/outputs";}
+	std::string get_userFoldre()    { return _folderAddress + "/user";}
 	/**
 	 well, it's onlinejudge after all!
 	 @param problem
@@ -55,18 +46,11 @@ public:
 			submission to judge problem with
 	 @return result of judge
 	 */
-	std::string judge_problem(Problem problem, Submission submission);
-	
-	/**
-	 determins if this judge is ready to judge a problem or not
-	 */
-	bool is_busy();
+	Result judge_problem(Problem problem, Submission submission);
 private:
 	std::string _username;
-	std::string _password;
-	
-	std::string _folderAddress;
-	
+	Submission  _submission;
+	Problem     _problem;
 	/**
 	 the real deal
 	 */

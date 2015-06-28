@@ -18,27 +18,14 @@
 #include "OJManager.h"
 #include <fstream>
 
-Judge::Judge(std::string username, std::string password) {
-	_username = username;
-	_password = password;
-}
-
-void Judge::set_folder_address(std::string folderAddress) {
-	_folderAddress = folderAddress;
-}
-
-bool Judge::is_busy() {
-	return 0;
-}
-
 std::string Judge::run_test_cases(Problem problem, Submission& submission) {
 	std::stringstream inputs_stream
 	(terminal::system
-	 ("cd " +  this->get_folder_address() + "; " + "find " + problem.problemName + "*.in"));
+	 ("cd " +  _folderAddress + "; " + "find " + problem.problemName + "*.in"));
 	
 	std::stringstream outputs_stream
 	(terminal::system
-	 ("cd " +  this->get_folder_address() + "; " + "find " + problem.problemName + "*.out"));
+	 ("cd " +  _folderAddress + "; " + "find " + problem.problemName + "*.out"));
 	
 	std::vector<std::string> inputs;
 	std::vector<std::string> outputs;
