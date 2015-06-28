@@ -16,49 +16,34 @@
 
 #include "FileManager.h"
 #include "TerminalManager.h"
+#include "UsefullFunctions.h"
 
 // MARK: public methods
-void FileManager::move_testdata_submission_to_judgeFolder
-(Problem problem, Judge* judge, Submission& submission) {
-	// remove all fils in judge folder
-	terminal::system("rm " + judge->get_folder_address() + "/*.*");
-	
-	// move all testdata into judge folder
-	std::string moveTestDataCmd = "find " + _prefixAddress;
-	moveTestDataCmd += "/Testdata/" + problem.problemName + "_*.*";
-	moveTestDataCmd += " -exec cp -t ";
-	moveTestDataCmd += judge->get_folder_address();
-	moveTestDataCmd += "/ {} \\+";
-	terminal::system(moveTestDataCmd);
-	
-	// move submission
-	std::string moveSubmission = "find " + _prefixAddress;
-	moveSubmission += "/Submissions/" + int_to_string((int)submission.submissionId) + ".*";
-	
-	// before moving submission completely, catch it's name
-	std::string submissionFileAddress = terminal::system(moveSubmission);
-	submissionFileAddress = submissionFileAddress.substr(0, int(submissionFileAddress.size())-1);
-	size_t pos = submissionFileAddress.find_last_of('/');
-	std::string submissionName = submissionFileAddress.substr(pos+1);
-	
-	moveSubmission += " -exec cp -t ";
-	moveSubmission += judge->get_folder_address();
-	moveSubmission += "/ {} \\+";
-	std::string sub = terminal::system(moveSubmission);
-	submission.submissionAddress = judge->get_folder_address() + "/" + submissionName;
+void FileManager::prepare_judge_folder(Submission& submission, Problem& problem, Judge* judge) {
+	std::string findSb = "cd " + _submissionsFolder + ";find " + submission.submissionId;
+	submission.submissionId = terminal::system(findSb);
+	submission.fileAddress = _submissionsFolder + "/" + submission.submissionId;
+	std::string command = clear_folder_cmd(judge->get_judgeFolder());
+	command += move_inputs_cmd(problem.problemName, judge->get_inputsFolder());
+	command += move_outputs_cmd(problem.problemName, judge->get_outputsFolder());
+	command += move_submission_cmd(_submissionsFolder + "/" + submission.submissionId, submission.fileAddress);
+	terminal::system(command);
 }
 
-void FileManager::clear_folder(std::string address) {
+std::string FileManager::clear_folder_cmd(std::string address) {
+	return "cd " + address +"; find . -type f -exec rm {} \\+;";
 }
 
-void FileManager::move_inputs(std::string problemName, std::string address) {
-	std::string cmd = "find " + address
+std::string FileManager::move_inputs_cmd(std::string problemName, std::string address) {
+	return "find " + address + "/" + problemName + "_*.in -exec cp -t " + address + " {} \\+;";
 }
 
-void FileManager::move_outputs(std::string problemName, std::string address) {
+std::string FileManager::move_outputs_cmd(std::string problemName, std::string address) {
+	return "find " + address + "/" + problemName + "_*.out -exec cp -t " + address + " {} \\+;";
 }
 
-void FileManager::move_submission(std::string  submission, std::string address) {
+std::string FileManager::move_submission_cmd(std::string  submission, std::string address) {
+	return "mv " + submission + " " + address + ";";
 }
 
 

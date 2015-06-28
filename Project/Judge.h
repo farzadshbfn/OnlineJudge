@@ -37,7 +37,7 @@ public:
 	std::string get_judgeFolder()   { return _folderAddress;}
 	std::string get_inputsFolder()  { return _folderAddress + "/inputs";}
 	std::string get_outputsFolder() { return _folderAddress + "/outputs";}
-	std::string get_userFoldre()    { return _folderAddress + "/user";}
+	std::string get_userFolder()    { return _folderAddress + "/user";}
 	/**
 	 well, it's onlinejudge after all!
 	 @param problem

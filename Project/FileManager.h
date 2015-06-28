@@ -37,21 +37,20 @@ public:
 	 ***: set _submissionsFolder & _testdatasFolder before calling this method
 	 clears the folder dedicated to judge. fills it with testdata of problem, submission
 	 and it's runnable version
+	 @param submission
+			submited code which is about to be tested
 	 @param problem
 			is needed for problemID to fetch all testdata
 	 @param judge
 			is needed to copy contents of problen into the folder dedicated for this judge
-	 @param submission
-			submited code which is about to be tested
 	 */
-	void move_testdata_submission_to_judgeFolder
-	(Problem problem, Judge* judge, Submission& submission);
+	void prepare_judge_folder(Submission& submission, Problem& problem, Judge* judge);
 	
 private:
-	void clear_folder   (std::string address);
-	void move_inputs    (std::string problemName, std::string address);
-	void move_outputs   (std::string problemName, std::string address);
-	void move_submission(std::string  submission, std::string address);
+	std::string clear_folder_cmd   (std::string address);
+	std::string move_inputs_cmd    (std::string problemName, std::string address);
+	std::string move_outputs_cmd   (std::string problemName, std::string address);
+	std::string move_submission_cmd(std::string  submission, std::string address);
 };
 
 

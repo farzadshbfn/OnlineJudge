@@ -32,7 +32,9 @@ namespace terminal {
 				result += buffer;
 		}
 		pclose(pipe);
-		return result;
+		if (result.size())
+			return result.substr(0, (int)result.size()-1);
+		return "";
 	}
 	
 }

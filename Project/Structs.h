@@ -10,7 +10,6 @@
 #define OJ_Structs_h
 
 #include "BasicLibraries.h"
-#include <sys/time.h>
 
 struct Result {
 	bool runtimeError;
@@ -29,9 +28,8 @@ struct Problem {
 
 // TODO: change it later with DIR from dirent.h
 struct Submission {
-	size_t      submissionId;
+	std::string submissionId;
 	std::string fileAddress;
-	std::string fileName;
 };
 
 
