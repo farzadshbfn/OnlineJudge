@@ -11,13 +11,28 @@
 
 #include "BasicLibraries.h"
 
+#define RESULT_ACCEPTED              0
+#define RESULT_COMPILE_ERROR         1
+#define RESULT_RUNTIME_ERROR         2
+#define RESULT_TIME_LIMIT_EXCEEDED   4
+#define RESULT_MEMORY_LIMIT_EXCEEDED 8
+
 struct Result {
-	bool runtimeError;
+	int resultFlag;
 	int timeUsed;   // in ms
 	int memoryUsed; // in KB
 	std::string compileResult;
 	int totalTestcases;
 	int acceptedTestcases;
+	
+	void reset() {
+		resultFlag = 0;
+		timeUsed = 0;
+		memoryUsed = 0;
+		compileResult = "";
+		totalTestcases = 1; // just to ignore divide by zero
+		acceptedTestcases = 0;
+	}
 };
 
 struct Problem {

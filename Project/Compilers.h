@@ -40,7 +40,7 @@ public:
 	 call this method before calling others
 	 */
 	virtual void set_fileAddress(std::string fileAddress);
-	
+	std::string get_compileFile() { return "compileResult.txt";}
 };
 
 // MARK: Compilers

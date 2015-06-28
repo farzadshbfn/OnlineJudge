@@ -23,7 +23,7 @@ void FileManager::prepare_judge_folder(Submission& submission, Problem& problem,
 	//TODO: handle following 2 lines with DIR from <dirent.h>
 	std::string findSb = "cd " + _submissionsFolder + ";find " + submission.submissionId + "*";
 	submission.submissionId = terminal::system(findSb);
-	submission.fileAddress = _submissionsFolder + "/" + submission.submissionId;
+	submission.fileAddress = judge->get_judgeFolder() + "/" + submission.submissionId;
 	std::string command = clear_folder_cmd(judge->get_judgeFolder());
 	command += move_inputs_cmd(problem.problemName, judge->get_inputsFolder());
 	command += move_outputs_cmd(problem.problemName, judge->get_outputsFolder());

@@ -16,9 +16,8 @@
 
 #include "Judge.h"
 #include "OJManager.h"
-#include <fstream>
 
-std::string Judge::run_test_cases(Problem problem, Submission& submission) {
+std::string Judge::run_test_cases() {
 //	std::stringstream inputs_stream
 //	(terminal::system
 //	 ("cd " +  _folderAddress + "; " + "find " + problem.problemName + "*.in"));
@@ -84,36 +83,52 @@ std::string Judge::run_test_cases(Problem problem, Submission& submission) {
 	return "";
 }
 
+void Judge::generate_outputs() {
+}
 
 std::string Judge::judge_problem(Problem problem, Submission submission) {
+	_result.reset();
 	_submission = submission;
 	_problem = problem;
-//	OJManager* sharedInstance = OJManager::shared_instance();
-//	sharedInstance->_fileManager->prepare_problem_for_judge_to_test_submission(problem, this, submission);
-//	ICompiler* compiler = sharedInstance->_compilerManager->get_suitable_compiler(submission.submissionAddress);
-//	std::string compResAdd = this->get_folder_address() + "/compileResult.txt";
-//	terminal::system(compiler->generate_compile_command(submission.submissionAddress) + " 2>" + compResAdd);
-//	// check if file exists
-//	std::string fileExistCommand = "test -f " + compiler->get_executable_file_address(submission.submissionAddress) + "; echo $?";
-//	std::string checkResult = terminal::system(fileExistCommand);
-//	checkResult = checkResult.substr(0, 1);
-//	
-//	if (checkResult == "0") // exists
-//		return run_test_cases(problem, submission);
-//	
-//	std::string compileResult = "CompileError\n";
-//	std::fstream fs(this->get_folder_address() + "/compileResult.txt");
-//	if (fs.is_open()) {
-//		std::string line;
-//		while (std::getline(fs, line, '\n'))
-//			compileResult += line;
-//		fs.close();
-//	}
-//	return compileResult;
+
+	ICompiler *compiler =
+	CompilerManager::shared_instance()->get_suitable_compiler(submission.fileAddress);
+	std::string cmd = compiler->pre_compile_command() + compiler->compile_command();
+	terminal::system(cmd);
+	_result.compileResult = get_content_of_file(get_judgeFolder() + "/" + compiler->get_compileFile());
+	// check compileError
+	if (file_exists(compiler->executable_address())) {
+		_result.resultFlag |= RESULT_COMPILE_ERROR;
+	}
+	
+	generate_outputs();
+	
 	return "";
 }
 
+std::vector<std::string> Judge::inputs() {
+	return get_files_in_folder(get_inputsFolder());
+}
 
+std::vector<std::string> Judge::outputs() {
+	return get_files_in_folder(get_outputsFolder());
+}
+
+std::vector<std::string> Judge::results() {
+	return get_files_in_folder(get_resultsFolder());
+}
+
+std::vector<std::string> Judge::diffs() {
+	return get_files_in_folder(get_diffsFolder());
+}
+
+std::string Judge::result_file(std::string output) {
+	return get_resultsFolder() + output.substr(output.find_last_of("/")+1);
+}
+
+std::string Judge::diff_file  (std::string output) {
+	return get_diffsFolder() + output.substr(output.find_last_of("/")+1);
+}
 
 
 

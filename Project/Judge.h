@@ -37,7 +37,8 @@ public:
 	std::string get_judgeFolder()   { return _folderAddress;}
 	std::string get_inputsFolder()  { return _folderAddress + "/inputs";}
 	std::string get_outputsFolder() { return _folderAddress + "/outputs";}
-	std::string get_userFolder()    { return _folderAddress + "/user";}
+	std::string get_resultsFolder() { return _folderAddress + "/results";}
+	std::string get_diffsFolder()   { return _folderAddress + "/diffs";}
 	/**
 	 well, it's onlinejudge after all!
 	 @param problem
@@ -51,10 +52,20 @@ private:
 	std::string _username;
 	Submission  _submission;
 	Problem     _problem;
-	/**
-	 the real deal
-	 */
-	std::string run_test_cases(Problem problem, Submission& submission);
+	
+	Result _result;
+	
+	void generate_outputs();
+	std::string run_test_cases();
+	std::string run_command();
+	
+	std::vector<std::string> inputs();
+	std::vector<std::string> outputs();
+	std::vector<std::string> results();
+	std::vector<std::string> diffs();
+	
+	std::string result_file(std::string output);
+	std::string diff_file  (std::string output);
 };
 
 

@@ -23,18 +23,18 @@
 #include "OJManager.h"
 
 void test() {
-	OJManager *sharedInstance = OJManager::shared_instance();
+	OJManager *manager = OJManager::shared_instance();
 	Problem problem;
 	problem.problemName = "100";
 	
 	Submission submission;
 	submission.submissionId = to_string(1001);
 	
-	Judge* judge = sharedInstance->_judgeManager->get_a_judge();
+	Judge* judge = manager->_judgeManager->get_a_judge();
 	
-	sharedInstance->_fileManager->prepare_judge_folder(submission, problem, judge);
+	manager->_fileManager->prepare_judge_folder(submission, problem, judge);
 	
-//	std::string result = judge->judge_problem(problem, submission);
+	judge->judge_problem(problem, submission);
 }
 
 void init() {

@@ -28,6 +28,10 @@ std::string ICompiler::pre_compile_command() {
 	return "";
 }
 
+std::string ICompiler::compile_command() {
+	return " 2>" + get_compileFile() + ";";
+}
+
 void ICompiler::set_fileAddress(std::string fileAddress) {
 	_fileAddress = fileAddress;
 	size_t pos = fileAddress.find_last_of('/');
@@ -45,7 +49,7 @@ char** ICompiler::exec_argv() {
 
 // MARK: CompilerGpp
 std::string CompilerGpp::compile_command() {
-	return "cd " + _folderAddress + "; g++ " + _fileName + " -std=c++11";
+	return "cd " + _folderAddress + "; g++ " + _fileName + " -std=c++11" + ICompiler::compile_command();
 }
 
 std::string CompilerGpp::executable_file() {
@@ -59,7 +63,7 @@ std::string CompilerGpp::code_extension() {
 
 // MARK: CompilerGcc
 std::string CompilerGcc::compile_command() {
-	return "cd " + _folderAddress + "; gcc " + _fileName + " -std=c++11";
+	return "cd " + _folderAddress + "; gcc " + _fileName + ICompiler::compile_command();
 }
 
 std::string CompilerGcc::executable_file() {
@@ -72,11 +76,11 @@ std::string CompilerGcc::code_extension() {
 
 // MARK: CompilerJava
 std::string CompilerJava::pre_compile_command() {
-	return "mv " + _fileAddress + " " + _folderAddress + "/" + executable_file() + ".java";
+	return "mv " + _fileAddress + " " + _folderAddress + "/" + executable_file() + ".java;";
 }
 
 std::string CompilerJava::compile_command() {
-	return "cd " + _folderAddress + ";javac " + executable_file() + ".java";
+	return "cd " + _folderAddress + ";javac " + executable_file() + ".java" + ICompiler::compile_command();
 }
 
 void CompilerJava::set_fileAddress(std::string fileAddress) {
@@ -119,8 +123,10 @@ ICompiler* CompilerManager::get_suitable_compiler(std::string submitAddress) {
 	std::string fileType = submitAddress.substr(pos+1);
 	
 	for (ICompiler *compiler: compilers)
-		if (compiler->compile_command() == fileType)
+		if (compiler->code_extension() == fileType) {
+			compiler->set_fileAddress(submitAddress);
 			return compiler;
+		}
 	
 	return NULL;
 }
