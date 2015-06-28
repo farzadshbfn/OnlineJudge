@@ -19,6 +19,11 @@
 
 // MARK: ICompiler
 
+ICompiler::ICompiler() {
+	_argv = new char*[1];
+	_argv[0] = NULL;
+}
+
 std::string ICompiler::pre_compile_command() {
 	return "";
 }
@@ -76,11 +81,6 @@ std::string CompilerJava::compile_command() {
 
 void CompilerJava::set_fileAddress(std::string fileAddress) {
 	ICompiler::set_fileAddress(fileAddress);
-	for (int i = 0;; i++)
-		if (_argv[i])
-			delete _argv[i];
-		else
-			break;
 	delete[] _argv;
 	_argv = new char*[2];
 	_argv[1] = NULL;

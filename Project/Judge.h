@@ -46,7 +46,7 @@ public:
 			submission to judge problem with
 	 @return result of judge
 	 */
-	Result judge_problem(Problem problem, Submission submission);
+	std::string judge_problem(Problem problem, Submission submission);
 private:
 	std::string _username;
 	Submission  _submission;

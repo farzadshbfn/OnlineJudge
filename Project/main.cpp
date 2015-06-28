@@ -25,12 +25,14 @@
 void test() {
 	OJManager *sharedInstance = OJManager::shared_instance();
 	Problem problem;
-	problem.problemName = "1001";
+	problem.problemName = "100";
 	
 	Submission submission;
-	submission.submissionId = 1001;
+	submission.submissionId = to_string(1001);
 	
 	Judge* judge = sharedInstance->_judgeManager->get_a_judge();
+	
+	sharedInstance->_fileManager->prepare_judge_folder(submission, problem, judge);
 	
 //	std::string result = judge->judge_problem(problem, submission);
 }

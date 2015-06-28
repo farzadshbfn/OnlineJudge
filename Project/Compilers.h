@@ -23,6 +23,7 @@
 
 class ICompiler {
 protected:
+	ICompiler();
 	std::string _fileAddress;
 	std::string _folderAddress;
 	std::string _fileName;
@@ -39,13 +40,14 @@ public:
 	 call this method before calling others
 	 */
 	virtual void set_fileAddress(std::string fileAddress);
+	
 };
 
 // MARK: Compilers
 
 class CompilerGpp: public ICompiler {
 public:
-	CompilerGpp();
+	CompilerGpp(): ICompiler() {}
 	
 	std::string compile_command() override;
 	std::string executable_file() override;
@@ -54,7 +56,7 @@ public:
 
 class CompilerGcc: public ICompiler {
 public:
-	CompilerGcc();
+	CompilerGcc(): ICompiler() {}
 	
 	std::string compile_command() override;
 	std::string executable_file() override;
@@ -63,12 +65,11 @@ public:
 
 class CompilerJava: public ICompiler {
 public:
-	CompilerJava();
+	CompilerJava(): ICompiler() {}
 	
 	std::string pre_compile_command() override;
 	std::string compile_command() override;
 	std::string executable_file() override;
-	char**      exec_argv() override;
 	std::string code_extension() override;
 	void set_fileAddress(std::string fileAddress) override;
 };

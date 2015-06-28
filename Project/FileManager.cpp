@@ -20,13 +20,14 @@
 
 // MARK: public methods
 void FileManager::prepare_judge_folder(Submission& submission, Problem& problem, Judge* judge) {
-	std::string findSb = "cd " + _submissionsFolder + ";find " + submission.submissionId;
+	//TODO: handle following 2 lines with DIR from <dirent.h>
+	std::string findSb = "cd " + _submissionsFolder + ";find " + submission.submissionId + "*";
 	submission.submissionId = terminal::system(findSb);
 	submission.fileAddress = _submissionsFolder + "/" + submission.submissionId;
 	std::string command = clear_folder_cmd(judge->get_judgeFolder());
 	command += move_inputs_cmd(problem.problemName, judge->get_inputsFolder());
 	command += move_outputs_cmd(problem.problemName, judge->get_outputsFolder());
-	command += move_submission_cmd(_submissionsFolder + "/" + submission.submissionId, submission.fileAddress);
+	command += move_submission_cmd(_submissionsFolder + "/" + submission.submissionId, judge->get_judgeFolder());
 	terminal::system(command);
 }
 
@@ -35,15 +36,15 @@ std::string FileManager::clear_folder_cmd(std::string address) {
 }
 
 std::string FileManager::move_inputs_cmd(std::string problemName, std::string address) {
-	return "find " + address + "/" + problemName + "_*.in -exec cp -t " + address + " {} \\+;";
+	return "find " + _testdatasFolder + "/" + problemName + "_*.in -exec cp -t " + address + " {} \\+;";
 }
 
 std::string FileManager::move_outputs_cmd(std::string problemName, std::string address) {
-	return "find " + address + "/" + problemName + "_*.out -exec cp -t " + address + " {} \\+;";
+	return "find " + _testdatasFolder + "/" + problemName + "_*.out -exec cp -t " + address + " {} \\+;";
 }
 
-std::string FileManager::move_submission_cmd(std::string  submission, std::string address) {
-	return "mv " + submission + " " + address + ";";
+std::string FileManager::move_submission_cmd(std::string submission, std::string address) {
+	return "cp " + submission + " " + address + ";";
 }
 
 

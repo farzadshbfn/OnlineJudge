@@ -40,7 +40,7 @@ public:
 	 @param submission
 			submited code which is about to be tested
 	 @param problem
-			is needed for problemID to fetch all testdata
+			is needed for problemName to fetch all testdata
 	 @param judge
 			is needed to copy contents of problen into the folder dedicated for this judge
 	 */
