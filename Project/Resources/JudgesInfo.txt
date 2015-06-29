@@ -1,4 +1,0 @@
-judge1:
-judge2:
-judge3:
-judge4:

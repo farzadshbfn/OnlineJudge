@@ -47,17 +47,18 @@ public:
 			submission to judge problem with
 	 @return result of judge
 	 */
-	std::string judge_problem(Problem problem, Submission submission);
+	Result judge_problem(Problem problem, Submission submission);
 private:
 	std::string _username;
 	Submission  _submission;
 	Problem     _problem;
+	ICompiler*  _compiler;
 	
 	Result _result;
 	
-	void generate_outputs();
+	void execute_single(std::string input, std::string output);
+	void execute_all();
 	std::string run_test_cases();
-	std::string run_command();
 	
 	std::vector<std::string> inputs();
 	std::vector<std::string> outputs();

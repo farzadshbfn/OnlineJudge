@@ -17,93 +17,52 @@
 #include "Judge.h"
 #include "OJManager.h"
 
-std::string Judge::run_test_cases() {
-//	std::stringstream inputs_stream
-//	(terminal::system
-//	 ("cd " +  _folderAddress + "; " + "find " + problem.problemName + "*.in"));
-//	
-//	std::stringstream outputs_stream
-//	(terminal::system
-//	 ("cd " +  _folderAddress + "; " + "find " + problem.problemName + "*.out"));
-//	
-//	std::vector<std::string> inputs;
-//	std::vector<std::string> outputs;
-//	std::vector<std::string> userOutputs;
-//	std::string line;
-//	while (inputs_stream >> line && line != "")
-//		inputs.push_back(line);
-//	while (outputs_stream >> line && line != "")
-//		outputs.push_back(line);
-//	
-//	if (inputs.size())
-//		std::sort(inputs.begin(), inputs.end());
-//	if (outputs.size())
-//		std::sort(outputs.begin(), outputs.end());
-//	
-//	
-//	ICompiler *compiler =
-//	OJManager::shared_instance()->
-//	_compilerManager->
-//	get_suitable_compiler(submission.submissionAddress);
-//	
-//	// TODO: check later for problem with no input
-//	for (int i = 0; i < inputs.size(); i++) {
-//		// TODO: check for runtime
-//		std::string testCommand = "cd " + this->get_folder_address() + "; ";
-//		testCommand += "sudo -u " + this->_username + " ";
-//		testCommand += compiler->get_excute_command_localized();
-//		testCommand += " <" + inputs[i];
-//		std::stringstream ss;
-//		ss << i;
-//		testCommand += " >u_" + ss.str() + ".out";
-//		terminal::system(testCommand);
-//	}
-//	int accepted = 0;
-//	for (int i = 0; i < outputs.size(); i++) {
-//		std::string compareCommand = "cd " + this->get_folder_address() + "; ";
-//		compareCommand += "diff " + outputs[i] + " ";
-//		std::stringstream ss;
-//		ss << i;
-//		compareCommand += "u_" + ss.str() + ".out";
-//		std::string compResult = terminal::system(compareCommand);
-//		compResult = compResult.substr(0, int(compResult.size())-1);
-//		if (compResult == "")
-//			accepted++;
-//	}
-//	std::string result;
-//	if (accepted == outputs.size())
-//		result = "Accepted";
-//	else {
-//		result = "WrongAnswer ";
-//		std::stringstream ss;
-//		ss << accepted << "/" << outputs.size();
-//		result += ss.str();
-//	}
-//	return result;
-	return "";
+
+void set_time_limit() {
 }
 
-void Judge::generate_outputs() {
+void set_memory_limit() {
 }
 
-std::string Judge::judge_problem(Problem problem, Submission submission) {
+
+void Judge::execute_single(std::string input, std::string output) {
+	
+}
+
+void Judge::execute_all() {
+	auto ins = inputs();
+	auto outs = outputs();
+	for (int i = 0; i < outs.size(); i++) {
+		std::string in = (i < ins.size()? ins[i] : "");
+		std::string out = result_file(outs[i]);
+		execute_single(in, out);
+		if (_result.resultFlag)
+			return;
+	}
+}
+
+Result Judge::judge_problem(Problem problem, Submission submission) {
 	_result.reset();
 	_submission = submission;
 	_problem = problem;
 
-	ICompiler *compiler =
-	CompilerManager::shared_instance()->get_suitable_compiler(submission.fileAddress);
-	std::string cmd = compiler->pre_compile_command() + compiler->compile_command();
+	_compiler = CompilerManager::shared_instance()->get_suitable_compiler(submission.fileAddress);
+	std::string cmd = _compiler->pre_compile_command() + _compiler->compile_command();
 	terminal::system(cmd);
-	_result.compileResult = get_content_of_file(get_judgeFolder() + "/" + compiler->get_compileFile());
-	// check compileError
-	if (file_exists(compiler->executable_address())) {
+	_result.compileResult = get_content_of_file(get_judgeFolder() + "/" + _compiler->get_compileFile());
+	
+	if (!file_exists(_compiler->executable_address())) {
 		_result.resultFlag |= RESULT_COMPILE_ERROR;
+		return _result;
 	}
 	
-	generate_outputs();
+	execute_all();
 	
-	return "";
+	if (_result.resultFlag)
+		return _result;
+	
+	_result.resultFlag |= _result.acceptedTestcases != _result.totalTestcases;
+	return _result;
 }
 
 std::vector<std::string> Judge::inputs() {

@@ -19,7 +19,6 @@
 
 #include "BasicLibraries.h"
 #include "TerminalManager.h"
-#include "Judge.h"
 
 class ICompiler {
 protected:
