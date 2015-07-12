@@ -25,10 +25,12 @@
 #define RESULT_RUNTIME_ERROR         4
 #define RESULT_TIME_LIMIT_EXCEEDED   8
 #define RESULT_MEMORY_LIMIT_EXCEEDED 16
+#define RESULT_PRESENTATION_ERROR    32
+#define RESULT_OUTPUT_FORMAT_ERROR   64
 
 struct Result {
 	int resultFlag;
-	int timeUsed;   // in ms
+	int timeUsed;   // in s
 	int memoryUsed; // in KB
 	std::string compileResult;
 	int totalTestcases;

@@ -84,12 +84,17 @@ void Judge::execute_single(std::string input, std::string output) {
 	else {
 		int res;
 		waitpid(pid, &res, 0);
+//		std::cerr << res << std::endl;
 		switch (res) {
+			case 0: break;
+			case 9:
 			case 24:
 				_result.resultFlag |= RESULT_TIME_LIMIT_EXCEEDED;
 				break;
 				
-			default: break;
+			default:
+				_result.resultFlag |= RESULT_RUNTIME_ERROR;
+				break;
 		}
 		if (_result.resultFlag) return;
 	}

@@ -28,13 +28,14 @@ void test() {
 	problem.problemName = "100";
 	
 	Submission submission;
-	submission.submissionId = to_string(1002);
+	submission.submissionId = to_string(1006);
 	
 	Judge* judge = manager->_judgeManager->get_a_judge();
 	
 	manager->_fileManager->prepare_judge_folder(submission, problem, judge);
 	
-	judge->judge_problem(problem, submission);
+	Result result = judge->judge_problem(problem, submission);
+//	std::cerr << std::hex << result.resultFlag << std::endl;
 }
 
 void init() {
