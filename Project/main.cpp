@@ -45,7 +45,6 @@ void init() {
 }
 
 int main() {
-	while(1);
 	init();
 	test();
 	return 0;
