@@ -17,16 +17,82 @@
 #include "Judge.h"
 #include "OJManager.h"
 
+#include <signal.h>
+#include <sys/types.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <string.h>
+#include <sys/wait.h>
+#include <sys/resource.h>
 
-void set_time_limit() {
+sig_atomic_t pid;
+void Judge::set_time_limit() {
+	rlimit timeL;
+	timeL.rlim_cur = _problem.timeLimit;
+	timeL.rlim_max = _problem.timeLimit;
+	setrlimit(RLIMIT_CPU, &timeL);
 }
 
-void set_memory_limit() {
+void Judge::set_memory_limit() {
+	rlimit memL;
+	memL.rlim_cur = _problem.memoryLimit;
+	memL.rlim_max = _problem.memoryLimit;
+	setrlimit(RLIMIT_DATA, &memL);
 }
 
+void Judge::set_process_limit() {
+	rlimit procL;
+	procL.rlim_cur = 1;
+	procL.rlim_max = 1;
+	setrlimit(RLIMIT_NPROC, &procL);
+}
+
+void setup_input_output(std::string input, std::string output) {
+	int in, out;
+	in = open(input.c_str(), O_RDONLY);
+	out = open(output.c_str(), O_WRONLY | O_TRUNC | O_CREAT, S_IRUSR | S_IRGRP | S_IWGRP | S_IWUSR);
+	
+	dup2(in, 0);
+	dup2(out, 1);
+	close(in);
+	close(out);
+}
+
+void handler(int sig) {
+	if (sig == SIGCHLD) {
+		kill(pid, SIGKILL); // kill zombies
+	}
+}
+
+void setup_hanlder() {
+	struct sigaction sa;
+	memset(&sa, 0, sizeof sa);
+	sa.sa_handler = &handler;
+	sigaction(SIGCHLD, &sa, NULL);
+}
 
 void Judge::execute_single(std::string input, std::string output) {
-	
+	pid = fork();
+	setup_hanlder();
+	if (pid == 0) {
+		set_time_limit();
+		set_memory_limit();
+		set_process_limit();
+		setup_input_output(input, output);
+		execvp(_compiler->executable_address().c_str(), _compiler->exec_argv());
+	}
+	else {
+		int res;
+		waitpid(pid, &res, 0);
+		switch (res) {
+			case 24:
+				_result.resultFlag |= RESULT_TIME_LIMIT_EXCEEDED;
+				break;
+				
+			default: break;
+		}
+		if (_result.resultFlag) return;
+	}
 }
 
 void Judge::execute_all() {
@@ -36,8 +102,7 @@ void Judge::execute_all() {
 		std::string in = (i < ins.size()? ins[i] : "");
 		std::string out = result_file(outs[i]);
 		execute_single(in, out);
-		if (_result.resultFlag)
-			return;
+		if (_result.resultFlag) return;
 	}
 }
 
