@@ -37,7 +37,7 @@ void Judge::set_memory_limit() {
 	rlimit memL;
 	memL.rlim_cur = _problem.memoryLimit;
 	memL.rlim_max = _problem.memoryLimit;
-	setrlimit(RLIMIT_DATA, &memL);
+	setrlimit(RLIMIT_AS, &memL);
 }
 
 void Judge::set_process_limit() {
@@ -60,6 +60,7 @@ void setup_input_output(std::string input, std::string output) {
 
 void handler(int sig) {
 	if (sig == SIGCHLD) {
+		// TODO: get thread info before killing it
 		kill(pid, SIGKILL); // kill zombies
 	}
 }
@@ -84,7 +85,7 @@ void Judge::execute_single(std::string input, std::string output) {
 	else {
 		int res;
 		waitpid(pid, &res, 0);
-//		std::cerr << res << std::endl;
+		std::cerr << res << std::endl;
 		switch (res) {
 			case 0: break;
 			case 9:
@@ -111,6 +112,24 @@ void Judge::execute_all() {
 	}
 }
 
+void Judge::compare_outputs() {
+	auto outs = outputs();
+	auto ress = results();
+	if (outs.size() != ress.size()) {
+		_result.resultFlag |= RESULT_OUTPUT_FORMAT_ERROR;
+		return;
+	}
+	for (int i = 0; i < outs.size(); i++)
+		terminal::system("diff " + outs[i] + " " + ress[i] + " >" + diff_file(outs[i]));
+	
+	auto difs = diffs();
+	for (int i = 0; i < difs.size() && !_result.resultFlag; i++) {
+		std::string content = get_content_of_file(difs[i]);
+		if (content.size() != 0)
+			_result.resultFlag |= RESULT_WRONG_ANSWER;
+	}
+}
+
 Result Judge::judge_problem(Problem problem, Submission submission) {
 	_result.reset();
 	_submission = submission;
@@ -127,9 +146,10 @@ Result Judge::judge_problem(Problem problem, Submission submission) {
 	}
 	
 	execute_all();
+	if (_result.resultFlag) return _result;
 	
-	if (_result.resultFlag)
-		return _result;
+	compare_outputs();
+	if (_result.resultFlag) return _result;
 	
 	_result.resultFlag |= _result.acceptedTestcases != _result.totalTestcases;
 	return _result;

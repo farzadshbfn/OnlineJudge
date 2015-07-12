@@ -26,16 +26,18 @@ void test() {
 	OJManager *manager = OJManager::shared_instance();
 	Problem problem;
 	problem.problemName = "100";
+	problem.timeLimit = 30;
+	problem.memoryLimit = 100000;
 	
 	Submission submission;
-	submission.submissionId = to_string(1006);
+	submission.submissionId = to_string(1005);
 	
 	Judge* judge = manager->_judgeManager->get_a_judge();
 	
 	manager->_fileManager->prepare_judge_folder(submission, problem, judge);
 	
 	Result result = judge->judge_problem(problem, submission);
-//	std::cerr << std::hex << result.resultFlag << std::endl;
+	std::cerr << std::hex << result.resultFlag << std::endl;
 }
 
 void init() {

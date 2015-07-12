@@ -61,7 +61,7 @@ private:
 	void set_process_limit();
 	void execute_single(std::string input, std::string output);
 	void execute_all();
-	std::string run_test_cases();
+	void compare_outputs();
 	
 	std::vector<std::string> inputs();
 	std::vector<std::string> outputs();
