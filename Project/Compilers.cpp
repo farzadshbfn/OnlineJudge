@@ -40,7 +40,7 @@ void ICompiler::set_fileAddress(std::string fileAddress) {
 }
 
 std::string ICompiler::executable_address() {
-	return _folderAddress + this->executable_file();
+	return _folderAddress + "/" + this->executable_file();
 }
 
 char** ICompiler::exec_argv() {

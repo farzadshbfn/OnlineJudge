@@ -28,7 +28,7 @@ void test() {
 	problem.problemName = "100";
 	
 	Submission submission;
-	submission.submissionId = to_string(1001);
+	submission.submissionId = to_string(1002);
 	
 	Judge* judge = manager->_judgeManager->get_a_judge();
 	

@@ -147,11 +147,11 @@ std::vector<std::string> Judge::diffs() {
 }
 
 std::string Judge::result_file(std::string output) {
-	return get_resultsFolder() + output.substr(output.find_last_of("/")+1);
+	return get_resultsFolder() + "/" + output.substr(output.find_last_of("/")+1);
 }
 
 std::string Judge::diff_file  (std::string output) {
-	return get_diffsFolder() + output.substr(output.find_last_of("/")+1);
+	return get_diffsFolder() + "/" + output.substr(output.find_last_of("/")+1);
 }
 
 
