@@ -48,8 +48,8 @@ struct Result {
 
 struct Problem {
 	std::string problemName;
-	int         memoryLimit;
-	int         timeLimit;
+	int         memoryLimit; // in KB
+	int         timeLimit;   // in s
 };
 
 // TODO: change it later with DIR from dirent.h

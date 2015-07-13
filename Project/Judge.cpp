@@ -35,8 +35,8 @@ void Judge::set_time_limit() {
 
 void Judge::set_memory_limit() {
 	rlimit memL;
-	memL.rlim_cur = _problem.memoryLimit;
-	memL.rlim_max = _problem.memoryLimit;
+	memL.rlim_cur = _problem.memoryLimit * 1024; // convert KB to B
+	memL.rlim_max = _problem.memoryLimit * 1024; // convert KB to B
 	setrlimit(RLIMIT_AS, &memL);
 }
 
@@ -59,7 +59,7 @@ void setup_input_output(std::string input, std::string output) {
 }
 
 void handler(int sig) {
-	if (sig == SIGXCPU) {
+	if (sig == SIGXCPU) {		
 		// TODO: get thread info before killing it
 //		kill(pid, SIGKILL); // kill zombies
 	}
