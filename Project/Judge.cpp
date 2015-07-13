@@ -59,9 +59,9 @@ void setup_input_output(std::string input, std::string output) {
 }
 
 void handler(int sig) {
-	if (sig == SIGCHLD) {
+	if (sig == SIGXCPU) {
 		// TODO: get thread info before killing it
-		kill(pid, SIGKILL); // kill zombies
+//		kill(pid, SIGKILL); // kill zombies
 	}
 }
 
@@ -69,7 +69,7 @@ void setup_hanlder() {
 	struct sigaction sa;
 	memset(&sa, 0, sizeof sa);
 	sa.sa_handler = &handler;
-	sigaction(SIGCHLD, &sa, NULL);
+	sigaction(SIGXCPU, &sa, NULL);
 }
 
 void Judge::execute_single(std::string input, std::string output) {
@@ -92,7 +92,9 @@ void Judge::execute_single(std::string input, std::string output) {
 			case 24:
 				_result.resultFlag |= RESULT_TIME_LIMIT_EXCEEDED;
 				break;
-				
+			case 134:
+				_result.resultFlag |= RESULT_MEMORY_LIMIT_EXCEEDED;
+				break;
 			default:
 				_result.resultFlag |= RESULT_RUNTIME_ERROR;
 				break;

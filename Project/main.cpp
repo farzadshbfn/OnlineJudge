@@ -26,11 +26,11 @@ void test() {
 	OJManager *manager = OJManager::shared_instance();
 	Problem problem;
 	problem.problemName = "100";
-	problem.timeLimit = 30;
-	problem.memoryLimit = 100000;
+	problem.timeLimit = 5;
+	problem.memoryLimit = 100000000;
 	
 	Submission submission;
-	submission.submissionId = to_string(1005);
+	submission.submissionId = to_string(1002);
 	
 	Judge* judge = manager->_judgeManager->get_a_judge();
 	
