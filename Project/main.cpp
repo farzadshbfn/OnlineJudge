@@ -34,8 +34,6 @@ void test() {
 	
 	Judge* judge = manager->_judgeManager->get_a_judge();
 	
-	manager->_fileManager->prepare_judge_folder(submission, problem, judge);
-	
 	Result result = judge->judge_problem(problem, submission);
 	std::cerr << std::hex << result.resultFlag << std::endl;
 }
@@ -54,8 +52,8 @@ void cmd() {
 		ss << line;
 		ss >> line;
 		if (line == "submit") {
-			int subId, timeLimit, memLimit;
-			std::string probName;
+			int timeLimit, memLimit;
+			std::string probName, subId;
 			ss >> subId >> probName >> timeLimit >> memLimit;
 			Submission sub;
 			sub.submissionId = subId;

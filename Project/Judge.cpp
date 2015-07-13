@@ -94,7 +94,9 @@ void Judge::execute_single(std::string input, std::string output) {
 			case 24:
 				_result.resultFlag |= RESULT_TIME_LIMIT_EXCEEDED;
 				break;
+			case 11:
 			case 134:
+			case 32512:
 				_result.resultFlag |= RESULT_MEMORY_LIMIT_EXCEEDED;
 				break;
 			default:
@@ -135,6 +137,7 @@ void Judge::compare_outputs() {
 }
 
 Result Judge::judge_problem(Problem problem, Submission submission) {
+	OJManager::shared_instance()->_fileManager->prepare_judge_folder(submission, problem, this);
 	_result.reset();
 	_submission = submission;
 	_problem = problem;
