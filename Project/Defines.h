@@ -18,15 +18,17 @@
 #define OJ_Defines_h
 
 #ifdef __APPLE__
-#define FOLDER_ROOT_FILES "/Users/farzadshbfn/Desktop/OJ/Fake"
+#define FOLDER_ROOT_SUBMISSIONS "/Users/farzadshbfn/Desktop/OJ/Fake/Submissions"
+#define FOLDER_ROOT_TESTDATAS "/Users/farzadshbfn/Desktop/OJ/Fake/Testdatas"
 #elif __linux
-#define FOLDER_ROOT_FILES "/home/farzadshbfn/Desktop/OJ/Fake"
+#define FOLDER_ROOT_SUBMISSIONS "/home/farzadshbfn/Desktop/OJ/Fake/Submissions"
+#define FOLDER_ROOT_TESTDATAS "/home/farzadshbfn/Desktop/OJ/Fake/Testdatas"
 #endif
 
 #ifdef __APPLE__
-#define FOLDER_ROOT_JUDGES "/Users/farzadshbfn/Desktop/OJ/JudgeRoots"
+#define FOLDER_ROOT_JUDGESTEMP "/Users/farzadshbfn/Desktop/OJ/Temp"
 #elif __linux
-#define FOLDER_ROOT_JUDGES "/home/farzadshbfn/Desktop/OJ/JudgeRoots"
+#define FOLDER_ROOT_JUDGESTEMP "/home/farzadshbfn/Desktop/OJ/Temp"
 #endif
 
 #ifdef __APPLE__

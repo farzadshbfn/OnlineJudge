@@ -23,22 +23,28 @@
 #include "OJManager.h"
 
 void test() {
-	OJManager *sharedInstance = OJManager::shared_instance();
+	OJManager *manager = OJManager::shared_instance();
 	Problem problem;
-	problem.problemName = "1001";
+	problem.problemName = "100";
+	problem.timeLimit = 5;
+	problem.memoryLimit = 100000000;
 	
 	Submission submission;
-	submission.submissionId = 1001;
+	submission.submissionId = to_string(1002);
 	
-	Judge* judge = sharedInstance->_judgeManager->get_available_judge();
+	Judge* judge = manager->_judgeManager->get_a_judge();
 	
-	judge->judge_problem(problem, submission);
+	manager->_fileManager->prepare_judge_folder(submission, problem, judge);
+	
+	Result result = judge->judge_problem(problem, submission);
+	std::cerr << std::hex << result.resultFlag << std::endl;
 }
 
 void init() {
 	OJManager *sharedInstance = OJManager::shared_instance();
-	sharedInstance->_fileManager->set_prefix_folder_address(FOLDER_ROOT_FILES);
-	sharedInstance->_judgeManager->set_prefix_folder_address(FOLDER_ROOT_JUDGES);
+	sharedInstance->_fileManager->_submissionsFolder = FOLDER_ROOT_SUBMISSIONS;
+	sharedInstance->_fileManager->_testdatasFolder   = FOLDER_ROOT_TESTDATAS;
+	sharedInstance->_judgeManager->set_judgesTempFolders(FOLDER_ROOT_JUDGESTEMP);
 }
 
 int main() {

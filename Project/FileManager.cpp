@@ -16,46 +16,35 @@
 
 #include "FileManager.h"
 #include "TerminalManager.h"
+#include "UsefullFunctions.h"
 
 // MARK: public methods
-
-void FileManager::set_prefix_folder_address(std::string prefixFolderAddress) {
-	_prefixAddress = prefixFolderAddress;
+void FileManager::prepare_judge_folder(Submission& submission, Problem& problem, Judge* judge) {
+	//TODO: handle following 2 lines with DIR from <dirent.h>
+	std::string findSb = "cd " + _submissionsFolder + ";find " + submission.submissionId + "*";
+	submission.submissionId = terminal::system(findSb);
+	submission.fileAddress = judge->get_judgeFolder() + "/" + submission.submissionId;
+	std::string command = clear_folder_cmd(judge->get_judgeFolder());
+	command += move_inputs_cmd(problem.problemName, judge->get_inputsFolder());
+	command += move_outputs_cmd(problem.problemName, judge->get_outputsFolder());
+	command += move_submission_cmd(_submissionsFolder + "/" + submission.submissionId, judge->get_judgeFolder());
+	terminal::system(command);
 }
 
-std::string int_to_string(int number) {
-	std::stringstream ss;
-	ss << number;
-	return ss.str();
+std::string FileManager::clear_folder_cmd(std::string address) {
+	return "cd " + address +"; find . -type f -exec rm {} \\+;";
 }
 
-void FileManager::prepare_problem_for_judge_to_test_submission
-(Problem problem, Judge* judge, Submission& submission) {
-	// remove all fils in judge folder
-	terminal::system("rm " + judge->get_folder_address() + "/*.*");
-	
-	// move all testdata into judge folder
-	std::string moveTestDataCmd = "find " + _prefixAddress;
-	moveTestDataCmd += "/Testdata/" + problem.problemName + "_*.*";
-	moveTestDataCmd += " -exec cp -t ";
-	moveTestDataCmd += judge->get_folder_address();
-	moveTestDataCmd += "/ {} \\+";
-	terminal::system(moveTestDataCmd);
-	
-	// move submission
-	std::string moveSubmission = "find " + _prefixAddress;
-	moveSubmission += "/Submissions/" + int_to_string((int)submission.submissionId) + ".*";
-	
-	// before moving submission completely, catch it's name
-	std::string submissionFileAddress = terminal::system(moveSubmission);
-	submissionFileAddress = submissionFileAddress.substr(0, int(submissionFileAddress.size())-1);
-	size_t pos = submissionFileAddress.find_last_of('/');
-	std::string submissionName = submissionFileAddress.substr(pos+1);
-	
-	moveSubmission += " -exec cp -t ";
-	moveSubmission += judge->get_folder_address();
-	moveSubmission += "/ {} \\+";
-	std::string sub = terminal::system(moveSubmission);
-	submission.submissionAddress = judge->get_folder_address() + "/" + submissionName;
+std::string FileManager::move_inputs_cmd(std::string problemName, std::string address) {
+	return "find " + _testdatasFolder + "/" + problemName + "_*.in -exec cp -t " + address + " {} \\+;";
 }
-// MARK: private methods
+
+std::string FileManager::move_outputs_cmd(std::string problemName, std::string address) {
+	return "find " + _testdatasFolder + "/" + problemName + "_*.out -exec cp -t " + address + " {} \\+;";
+}
+
+std::string FileManager::move_submission_cmd(std::string submission, std::string address) {
+	return "cp " + submission + " " + address + ";";
+}
+
+

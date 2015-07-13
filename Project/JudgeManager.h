@@ -26,18 +26,18 @@ public:
 	JudgeManager();
 	/**
 	 set root folder address where all submissions and test datas are saved
-	 @param prefixAddress
+	 @param judgesTempFolders
 	 the root folder address
 	 */
-	void set_prefix_folder_address(std::string prefixAddress);
+	void set_judgesTempFolders(std::string judgesTempFolders);
 	/**
 	 @return root folder that contains judges folder
 	 */
-	std::string get_prefix_folder_address() { return _prefixFolderAddress;}
+	std::string get_judgesTempFolders() { return _judgesTempFolders;}
 	
-	Judge* get_available_judge();
+	Judge* get_a_judge();
 private:
-	std::string _prefixFolderAddress;
+	std::string _judgesTempFolders;
 	std::vector<Judge*> _judges;
 	
 	/**

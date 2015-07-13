@@ -27,4 +27,6 @@
 #include <algorithm>
 #include <sstream>
 
+#include "UsefullFunctions.h"
+
 #endif

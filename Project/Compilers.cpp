@@ -16,71 +16,90 @@
 
 #include "Compilers.h"
 
+
+// MARK: ICompiler
+
+ICompiler::ICompiler() {
+	_argv = new char*[1];
+	_argv[0] = NULL;
+}
+
+std::string ICompiler::pre_compile_command() {
+	return "";
+}
+
+std::string ICompiler::compile_command() {
+	return " 2>" + get_compileFile() + ";";
+}
+
+void ICompiler::set_fileAddress(std::string fileAddress) {
+	_fileAddress = fileAddress;
+	size_t pos = fileAddress.find_last_of('/');
+	_folderAddress = fileAddress.substr(0, pos);
+	_fileName = fileAddress.substr(pos+1);
+}
+
+std::string ICompiler::executable_address() {
+	return _folderAddress + "/" + this->executable_file();
+}
+
+char** ICompiler::exec_argv() {
+	return _argv;
+}
+
 // MARK: CompilerGpp
-std::string CompilerGpp::generate_compile_command(std::string submitAddress) {
-	std::string result;
-	result = "g++ " + submitAddress + " -std=c++11 ";
-	result += "-o " + get_executable_file_address(submitAddress);
-	return result;
+std::string CompilerGpp::compile_command() {
+	return "cd " + _folderAddress + "; g++ " + _fileName + " -std=c++11" + ICompiler::compile_command();
 }
 
-std::string CompilerGpp::generate_run_command(std::string submitAddress) {
-	return "." + get_executable_file_address(submitAddress);
+std::string CompilerGpp::executable_file() {
+	return "a.out";
 }
 
-std::string CompilerGpp::get_executable_file_address(std::string submitAddress) {
-	size_t pos = submitAddress.find_last_of('/');
-	return submitAddress.substr(0, pos) + "/a.out";
-}
-
-std::string CompilerGpp::get_file_type() {
+std::string CompilerGpp::code_extension() {
 	return "cpp";
 }
 
 
 // MARK: CompilerGcc
-std::string CompilerGcc::generate_compile_command(std::string submitAddress) {
-	std::string result;
-	result = "gcc " + submitAddress + " ";
-	result += "-o " + get_executable_file_address(submitAddress);
-	return result;
+std::string CompilerGcc::compile_command() {
+	return "cd " + _folderAddress + "; gcc " + _fileName + ICompiler::compile_command();
 }
 
-std::string CompilerGcc::generate_run_command(std::string submitAddress) {
-	return "." + get_executable_file_address(submitAddress);
+std::string CompilerGcc::executable_file() {
+	return "a.out";
 }
 
-std::string CompilerGcc::get_executable_file_address(std::string submitAddress) {
-	size_t pos = submitAddress.find_last_of('/');
-	return submitAddress.substr(0, pos) + "/a.out";
-}
-
-std::string CompilerGcc::get_file_type() {
+std::string CompilerGcc::code_extension() {
 	return "c";
 }
 
 // MARK: CompilerJava
-std::string CompilerJava::generate_compile_command(std::string submitAddress) {
-	std::string result;
-	//first it needs to be renamed to Main.java
-	size_t pos = submitAddress.find_last_of('/');
-	result = "cd " + submitAddress.substr(0, pos) + "; ";
-	std::string mainFileAddress = submitAddress.substr(0, pos) + "/Main.java";
-	result += "mv " + submitAddress + " " + mainFileAddress + "; ";
-	result += "javac Main.java";
-	return result;
+std::string CompilerJava::pre_compile_command() {
+	return "mv " + _fileAddress + " " + _folderAddress + "/" + executable_file() + ".java;";
 }
 
-std::string CompilerJava::generate_run_command(std::string submitAddress) {
-	return "java " + get_executable_file_address(submitAddress);
+std::string CompilerJava::compile_command() {
+	return "cd " + _folderAddress + ";javac " + executable_file() + ".java" + ICompiler::compile_command();
 }
 
-std::string CompilerJava::get_executable_file_address(std::string submitAddress) {
-	size_t pos = submitAddress.find_last_of('/');
-	return submitAddress.substr(0, pos) + "/Main";
+void CompilerJava::set_fileAddress(std::string fileAddress) {
+	ICompiler::set_fileAddress(fileAddress);
+	delete[] _argv;
+	_argv = new char*[2];
+	_argv[1] = NULL;
+	std::string temp = executable_address();
+	_argv[0] = new char[temp.size()];
+	for (int i = 0; i < temp.size(); i++)
+		_argv[0][i] = temp[i];
 }
 
-std::string CompilerJava::get_file_type() {
+std::string CompilerJava::executable_file() {
+	return "Main";
+}
+
+
+std::string CompilerJava::code_extension() {
 	return "java";
 }
 
@@ -104,8 +123,10 @@ ICompiler* CompilerManager::get_suitable_compiler(std::string submitAddress) {
 	std::string fileType = submitAddress.substr(pos+1);
 	
 	for (ICompiler *compiler: compilers)
-		if (compiler->get_file_type() == fileType)
+		if (compiler->code_extension() == fileType) {
+			compiler->set_fileAddress(submitAddress);
 			return compiler;
+		}
 	
 	return NULL;
 }

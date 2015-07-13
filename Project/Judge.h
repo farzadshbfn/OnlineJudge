@@ -18,34 +18,27 @@
 #define JUDGE_H
 
 #include "BasicLibraries.h"
-
-struct Problem {
-	std::string problemName;
-	int         memoryLimit;
-	float       timeLimit;
-};
-
-struct Submission {
-	size_t      submissionId;
-	std::string submissionAddress;
-};
+#include "Compilers.h"
+#include "Structs.h"
 
 
 class Judge {
 public:
-	Judge(std::string username, std::string password);
+	Judge(std::string username) { _username = username;}
 	
 	/**
-	 @param folderAddress
-			address of folder dedicated to this judge
+	 holds address to judge temp folder
 	 */
-	void set_folder_address(std::string folderAddress);
+	std::string _folderAddress;
 	
 	/**
-	 @return address of folder dedicated to this judge
-	 */
-	std::string get_folder_address() { return _folderAddress;}
-	
+	 set _folderAddress before calling below functions
+	*/
+	std::string get_judgeFolder()   { return _folderAddress;}
+	std::string get_inputsFolder()  { return _folderAddress + "/inputs";}
+	std::string get_outputsFolder() { return _folderAddress + "/outputs";}
+	std::string get_resultsFolder() { return _folderAddress + "/results";}
+	std::string get_diffsFolder()   { return _folderAddress + "/diffs";}
 	/**
 	 well, it's onlinejudge after all!
 	 @param problem
@@ -54,17 +47,29 @@ public:
 			submission to judge problem with
 	 @return result of judge
 	 */
-	std::string judge_problem(Problem problem, Submission submission);
-	
-	/**
-	 determins if this judge is ready to judge a problem or not
-	 */
-	bool is_busy();
+	Result judge_problem(Problem problem, Submission submission);
 private:
 	std::string _username;
-	std::string _password;
+	Submission  _submission;
+	Problem     _problem;
+	ICompiler*  _compiler;
 	
-	std::string _folderAddress;
+	Result _result;
+	
+	void set_time_limit();
+	void set_memory_limit();
+	void set_process_limit();
+	void execute_single(std::string input, std::string output);
+	void execute_all();
+	void compare_outputs();
+	
+	std::vector<std::string> inputs();
+	std::vector<std::string> outputs();
+	std::vector<std::string> results();
+	std::vector<std::string> diffs();
+	
+	std::string result_file(std::string output);
+	std::string diff_file  (std::string output);
 };
 
 

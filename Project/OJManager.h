@@ -27,7 +27,6 @@ public:
 	
 	FileManager*      _fileManager;
 	JudgeManager*     _judgeManager;
-	CompilerManager*  _compilerManager;
 	/**
 	 @return object shared through all the application
 	 */
@@ -43,7 +42,6 @@ private:
 	OJManager() {
 		_fileManager = new FileManager();
 		_judgeManager = new JudgeManager();
-		_compilerManager = CompilerManager::shared_instance();
 	}
 };
 

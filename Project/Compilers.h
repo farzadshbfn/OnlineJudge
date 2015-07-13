@@ -19,54 +19,58 @@
 
 #include "BasicLibraries.h"
 #include "TerminalManager.h"
-#include "Judge.h"
 
 class ICompiler {
+protected:
+	ICompiler();
+	std::string _fileAddress;
+	std::string _folderAddress;
+	std::string _fileName;
+	char**      _argv;
 public:
-	/**
-	 subclasses must provide compile command related to submited code
-	 */
-	virtual std::string generate_compile_command(std::string submitAddress) = 0;
+	virtual std::string pre_compile_command();
+	virtual std::string compile_command() = 0;
+	virtual std::string executable_address();
+	virtual std::string executable_file() = 0;
+	virtual char**      exec_argv();
+	virtual std::string code_extension() = 0;
 	
 	/**
-	 executes code
+	 call this method before calling others
 	 */
-	virtual std::string generate_run_command(std::string submitAddress) = 0;
-	
-	/**
-	 get excutable file address. (it's necessary to check if compiler did the job!)
-	 */
-	virtual std::string get_executable_file_address(std::string submitAddress) = 0;
-	/**
-	 get fileType
-	 */
-	virtual std::string get_file_type() = 0;
+	virtual void set_fileAddress(std::string fileAddress);
+	std::string get_compileFile() { return "compileResult.txt";}
 };
 
 // MARK: Compilers
 
 class CompilerGpp: public ICompiler {
 public:
-	std::string generate_compile_command(std::string submitAddress) override;
-	std::string generate_run_command(std::string submitAddress) override;
-	std::string get_executable_file_address(std::string submitAddress) override;
-	std::string get_file_type() override;
+	CompilerGpp(): ICompiler() {}
+	
+	std::string compile_command() override;
+	std::string executable_file() override;
+	std::string code_extension() override;
 };
 
 class CompilerGcc: public ICompiler {
 public:
-	std::string generate_compile_command(std::string submitAddress) override;
-	std::string generate_run_command(std::string submitAddress) override;
-	std::string get_executable_file_address(std::string submitAddress) override;
-	std::string get_file_type() override;
+	CompilerGcc(): ICompiler() {}
+	
+	std::string compile_command() override;
+	std::string executable_file() override;
+	std::string code_extension() override;
 };
 
 class CompilerJava: public ICompiler {
 public:
-	std::string generate_compile_command(std::string submitAddress) override;
-	std::string generate_run_command(std::string submitAddress) override;
-	std::string get_executable_file_address(std::string submitAddress) override;
-	std::string get_file_type() override;
+	CompilerJava(): ICompiler() {}
+	
+	std::string pre_compile_command() override;
+	std::string compile_command() override;
+	std::string executable_file() override;
+	std::string code_extension() override;
+	void set_fileAddress(std::string fileAddress) override;
 };
 
 

@@ -23,12 +23,12 @@
 
 JudgeManager::JudgeManager() {}
 
-void JudgeManager::set_prefix_folder_address(std::string prefixFolderAddress) {
-	_prefixFolderAddress = prefixFolderAddress;
+void JudgeManager::set_judgesTempFolders(std::string judgesTempFolders) {
+	_judgesTempFolders = judgesTempFolders;
 	load_judges();
 }
 
-Judge* JudgeManager::get_available_judge() {
+Judge* JudgeManager::get_a_judge() {
 	return _judges[0];
 }
 
@@ -37,23 +37,8 @@ Judge* JudgeManager::get_available_judge() {
 
 void JudgeManager::load_judges() {
 	_judges.clear();
-	
-	// address to where judge infos are saved
-	std::string fileAddress = FOLDER_ROOT_PROJECT;
-	fileAddress += "/Resources/JudgesInfo.txt";
-	
-	// open the file, and read from it
-	std::ifstream fs(fileAddress.c_str());
-	if (fs.is_open()) {
-		std::string line;
-		while (std::getline(fs, line, '\n')) {
-			size_t pos = line.find(':');
-			std::string username = line.substr(0, pos);
-			std::string password = line.substr(pos+1);
-			_judges.push_back(new Judge(username, password));
-			_judges.back()->set_folder_address(_prefixFolderAddress + "/" + username);
-		}
-		fs.close();
-	}
-
+	std::string judge1Username = "judge1";
+	Judge *judge = new Judge(judge1Username);
+	judge->_folderAddress = _judgesTempFolders + "/" + judge1Username;
+	_judges.push_back(judge);
 }
