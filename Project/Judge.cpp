@@ -59,9 +59,10 @@ void setup_input_output(std::string input, std::string output) {
 }
 
 void handler(int sig) {
-	if (sig == SIGXCPU) {		
+	if (sig == SIGCHLD) {
+//		std::cerr << "CHILD HERE " << pid << std::endl;
 		// TODO: get thread info before killing it
-//		kill(pid, SIGKILL); // kill zombies
+		kill(pid, SIGKILL); // prevent zombies
 	}
 }
 
@@ -69,7 +70,7 @@ void setup_hanlder() {
 	struct sigaction sa;
 	memset(&sa, 0, sizeof sa);
 	sa.sa_handler = &handler;
-	sigaction(SIGXCPU, &sa, NULL);
+	sigaction(SIGCHLD, &sa, NULL);
 }
 
 void Judge::execute_single(std::string input, std::string output) {
