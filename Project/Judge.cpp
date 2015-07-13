@@ -76,6 +76,8 @@ void Judge::execute_single(std::string input, std::string output) {
 	pid = fork();
 	setup_hanlder();
 	if (pid == 0) {
+		uid_t user = 1001;
+		setuid(user);
 		set_time_limit();
 		set_memory_limit();
 		set_process_limit();
