@@ -45,8 +45,22 @@ void init() {
 	sharedInstance->_judgeManager->set_judgesTempFolders(FOLDER_ROOT_JUDGESTEMP);
 }
 
+std::map<int, std::string> command_names() {
+	std::map<int, std::string> mp;
+	mp[0] = "ACCEPTED";
+	mp[1] = "COMPILE_ERROR";
+	mp[2] = "TIME_LIMIT_EXCEEDED";
+	mp[4] = "MEMORY_LIMIT_EXCEEDED";
+	mp[8] = "RUNTIME_ERROR";
+	mp[16] = "PRESENTATION_ERROR";
+	mp[32] = "WRONG_ANSWER";
+	mp[64] = "OUTPUT_FORMAT_ERROR";
+	return mp;
+}
+
 void cmd() {
 	std::string line;
+	auto commandNames = command_names();
 	while (std::getline(std::cin, line)) {
 		std::stringstream ss;
 		ss << line;
@@ -64,7 +78,7 @@ void cmd() {
 			
 			Judge *judge = OJManager::shared_instance()->_judgeManager->get_a_judge();
 			Result res = judge->judge_problem(prob, sub);
-			std::cout << res.resultFlag << std::endl;
+			std::cout << commandNames[res.resultFlag] << std::endl;
 		}
 		else if (line == "exit")
 			return;

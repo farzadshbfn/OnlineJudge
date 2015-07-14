@@ -54,6 +54,7 @@ void setup_input_output(std::string input, std::string output) {
 	
 	dup2(in, 0);
 	dup2(out, 1);
+	dup2(0, 2);
 	close(in);
 	close(out);
 }
@@ -88,7 +89,7 @@ void Judge::execute_single(std::string input, std::string output) {
 	else {
 		int res;
 		waitpid(pid, &res, 0);
-		std::cerr << res << std::endl;
+//		std::cerr << res << std::endl;
 		switch (res) {
 			case 0: break;
 			case 9:

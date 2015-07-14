@@ -36,11 +36,11 @@ std::string FileManager::clear_folder_cmd(std::string address) {
 }
 
 std::string FileManager::move_inputs_cmd(std::string problemName, std::string address) {
-	return "find " + _testdatasFolder + "/" + problemName + "_*.in -exec cp -t " + address + " {} \\+;";
+	return "cp " + _testdatasFolder + "/" + problemName + "/inputs/*.in " + address + ";";
 }
 
 std::string FileManager::move_outputs_cmd(std::string problemName, std::string address) {
-	return "find " + _testdatasFolder + "/" + problemName + "_*.out -exec cp -t " + address + " {} \\+;";
+	return "cp " + _testdatasFolder + "/" + problemName + "/outputs/*.out " + address + ";";
 }
 
 std::string FileManager::move_submission_cmd(std::string submission, std::string address) {

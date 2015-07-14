@@ -20,12 +20,12 @@
 #include "BasicLibraries.h"
 
 #define RESULT_ACCEPTED              0
-#define RESULT_WRONG_ANSWER          1
-#define RESULT_COMPILE_ERROR         2
-#define RESULT_RUNTIME_ERROR         4
-#define RESULT_TIME_LIMIT_EXCEEDED   8
-#define RESULT_MEMORY_LIMIT_EXCEEDED 16
-#define RESULT_PRESENTATION_ERROR    32
+#define RESULT_COMPILE_ERROR         1
+#define RESULT_TIME_LIMIT_EXCEEDED   2
+#define RESULT_MEMORY_LIMIT_EXCEEDED 4
+#define RESULT_RUNTIME_ERROR         8
+#define RESULT_PRESENTATION_ERROR    16
+#define RESULT_WRONG_ANSWER          32
 #define RESULT_OUTPUT_FORMAT_ERROR   64
 
 struct Result {
